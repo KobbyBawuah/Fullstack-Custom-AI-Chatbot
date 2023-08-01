@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import styles from '../styles/buttons.module.css';
+import MyButton from '../components/Button';
 
 export default function Home() {
   return (
@@ -47,7 +49,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
+            Docssss{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>

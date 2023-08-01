@@ -1,0 +1,13 @@
+/* styles/buttons.module.css */
+.grey-button {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.grey-button:hover {
+    background-color: #999;
+}
