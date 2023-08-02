@@ -141,7 +141,7 @@ export const queryVectorStoreAndLLM = async (
     if (queryResponse.matches.length) {
         // Create an OpenAI instance and load the question-answering model (QAStuffChain) using the loadQAStuffChain function.
         const llm = new OpenAI({});
-        //simplest follows what I did for the python version of the bot which was to just inject the inputs as prompts
+        //simply follows what I did for the python version of the bot which was to just inject the inputs as prompts
         const chain = loadQAStuffChain(llm);
         // Extract and concatenate page content from matched documents
         const concatenatedPageContent = queryResponse.matches
