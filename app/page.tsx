@@ -1,21 +1,13 @@
 'use client'
 import { useState } from 'react'
-import styles from '../styles/buttons.module.css';
+// import Dropzone from '../components/Dropzone';
 
 
 export default function Home() {
-  //plan ahead:
-  //test what happens when you change out the files in the documents directory
-  //get users to upload then click creat index and embedding. Delete documents un documents after loading is done
-  //when loading is done, show chat bot 
-  //come up with a button to either refresh the app or refresh the workflow
-  //set up history tracking
-  //if time permits, instrument moderation
-  //set up promts
-  //create new index with an id for each load/ find a way to identify users
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
+  const [trained, setTrained] = useState(false)
 
   //sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents. 
   async function createIndexAndEmbeddings() {
@@ -24,6 +16,7 @@ export default function Home() {
         method: "POST"
       })
       const json = await result.json()
+      setTrained(true)
       console.log('result: ', json)
     } catch (err) {
       console.log('err:', err)
@@ -82,20 +75,38 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-between p-24">
-      <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
-      <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask AI</button>
-      <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwerror}>Click to throw frontend error</button>
-      <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwapierror}>Click to throw API Route Error</button>
-      {/* If the loading state is true, it displays the loading message, and if the result state is not empty, it displays the result obtained from the server. */}
-      {
-        loading && <p>Asking AI ...</p>
-      }
-      {
-        result && <p>{result}</p>
-      }
-      { /* consider removing this button from the UI once the embeddings are created ... */}
-      <button onClick={createIndexAndEmbeddings}>Create index and embeddings</button>
-    </main>
+    <section className='flex flex-col gap-12 py-24'>
+      {/* Style the components */}
+      <div className='container'>
+        <h1 className='text-5xl font-bold'>Ask your PDF, Markdown documents or Text files 💬</h1>
+        <h2 className='text-zinc-600'>This is a chat bot implemented using Next.js, API Routes, and OpenAI API.</h2>
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwerror}>Click to throw frontend error</button>
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwapierror}>Click to throw API Route Error</button>
+      </div>
+
+      <div className='container'>
+        {/* Upload section */}
+        <h1 className='text-3xl font-bold'>Upload Files</h1>
+        {/* <Dropzone className='mt-10 border border-neutral-200 p-16'/> */}
+
+        { /* consider removing this button from the UI once the embeddings are created ... */}
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
+
+      </div>
+
+      <div className='container' style={{ display: trained ? "block" : "none" }}>
+        <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask AI</button>
+
+        {/* If the loading state is true, it displays the loading message, and if the result state is not empty, it displays the result obtained from the server. */}
+        {
+          loading && <p>Asking AI ...</p>
+        }
+        {
+          result && <p>{result}</p>
+        }
+      </div>
+    </section>
+
   )
 }
