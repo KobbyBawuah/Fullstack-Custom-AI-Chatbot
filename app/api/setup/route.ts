@@ -39,3 +39,5 @@ export async function POST() {
         data: 'successfully created index and loaded data into pinecone!'
     })
 }
+
+

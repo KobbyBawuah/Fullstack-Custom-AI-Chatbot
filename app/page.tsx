@@ -5,12 +5,14 @@ import styles from '../styles/buttons.module.css';
 
 export default function Home() {
   //plan ahead:
+  //test what happens when you change out the files in the documents directory
   //get users to upload then click creat index and embedding. Delete documents un documents after loading is done
   //when loading is done, show chat bot 
   //come up with a button to either refresh the app or refresh the workflow
   //set up history tracking
-  //create new index with an id for each load/ find a way to identify users
   //if time permits, instrument moderation
+  //set up promts
+  //create new index with an id for each load/ find a way to identify users
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)

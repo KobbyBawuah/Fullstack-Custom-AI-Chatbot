@@ -58,3 +58,18 @@ Upload your documents: Use the interface to upload the text or markdown files yo
 Start Interacting: The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
 
 Continuous Interactions: The chatbot considers both the provided chat history and your questions to generate appropriate responses, allowing you to engage in continuous interactions.
+
+
+
+### Side Note
+To adjust this bot to work with Notion there are two possible ways:
+
+# Manual 
+1. You could export the .md files from Notion and run an unzip command to insert the files into the Notion DB directory.
+2. Then you could just adjust the directory path in the setup/route to point at the Notion_DB directory. 
+
+# Automatic
+1. Load and update documents from Notion using the tool in llama hub:
+https://llamahub.ai/l/tools-notion 
+
+2. Adjust the code acordingly. 
