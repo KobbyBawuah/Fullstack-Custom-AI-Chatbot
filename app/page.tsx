@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-// import Dropzone from '../components/Dropzone';
+import Dropzone from '../components/Dropzone';
 
 
 export default function Home() {
@@ -87,8 +87,9 @@ export default function Home() {
       <div className='container'>
         {/* Upload section */}
         <h1 className='text-3xl font-bold'>Upload Files</h1>
-        {/* <Dropzone className='mt-10 border border-neutral-200 p-16'/> */}
+        <Dropzone className='p-16 mt-10 border border-neutral-200' />
 
+        <h2 className='text-zinc-600'>After every adjustment of the uploaded documents, recreat the knowledge base</h2>
         { /* consider removing this button from the UI once the embeddings are created ... */}
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
 
