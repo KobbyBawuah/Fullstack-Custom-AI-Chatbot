@@ -75,6 +75,26 @@ const Dropzone = ({ className }) => {
         }
     }
 
+    async function deleteAllFiles() {
+        try {
+            const result = await fetch('/api/delete', {
+                method: 'POST',
+            });
+
+            const json = await result.json();
+            console.log('Files deletion result:', json);
+
+            // Assuming the server returns { success: true } on successful deletion
+            if (json.success) {
+                console.log('All files have been deleted.');
+            } else {
+                console.error('Error deleting files:', json.error);
+            }
+        } catch (err) {
+            console.error('Error deleting files:', err);
+        }
+    }
+
     return (
         <form onSubmit={onSubmit}>
             <div {...getRootProps({
@@ -104,6 +124,13 @@ const Dropzone = ({ className }) => {
                         className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
                     >
                         Upload Files for processing
+                    </button>
+                    <button
+                        type='button'
+                        onClick={deleteAllFiles}
+                        className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
+                    >
+                        Clean saved files
                     </button>
                 </div>
 

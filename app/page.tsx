@@ -22,6 +22,7 @@ export default function Home() {
       console.log('err:', err)
     }
   }
+
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
     if (!query) return
@@ -91,13 +92,13 @@ export default function Home() {
         <div>
           { /* consider removing this button from the UI once the embeddings are created ... */}
           <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
-          <h2 className='text-zinc-600'>Note: The chat bot may take some time to train. It will appear below once the training is completed.</h2>
+          <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. It will appear below once the training is completed.</h2>
         </div>
       </div>
 
       <div className='container' style={{ display: trained ? "block" : "none" }}>
         <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
-        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask AI</button>
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask your AI</button>
 
         {/* If the loading state is true, it displays the loading message, and if the result state is not empty, it displays the result obtained from the server. */}
         {
