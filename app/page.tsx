@@ -91,6 +91,7 @@ export default function Home() {
         <div>
           { /* consider removing this button from the UI once the embeddings are created ... */}
           <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
+          <h2 className='text-zinc-600'>Note: The chat bot may take some time to train. It will appear below once the training is completed.</h2>
         </div>
       </div>
 
