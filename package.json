@@ -20,6 +20,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "formidable": "^3.5.0",
     "langchain": "^0.0.121",
     "next": "13.4.12",
     "pdf-parse": "^1.1.1",
