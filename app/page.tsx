@@ -75,11 +75,11 @@ export default function Home() {
   }
 
   return (
-    <section className='flex flex-col gap-12 py-24'>
+    <section className='flex flex-col gap-2 py-24'>
       {/* Style the components */}
       <div className='container'>
         <h1 className='text-5xl font-bold'>Ask your PDF, Markdown documents or Text files 💬</h1>
-        <h2 className='text-zinc-600'>This is a chat bot implemented using Next.js, API Routes, and OpenAI API.</h2>
+        <h2 className='text-zinc-600'>After every adjustment of the uploaded documents, recreat the knowledge base</h2>
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwerror}>Click to throw frontend error</button>
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwapierror}>Click to throw API Route Error</button>
       </div>
@@ -88,11 +88,10 @@ export default function Home() {
         {/* Upload section */}
         <h1 className='text-3xl font-bold'>Upload Files</h1>
         <Dropzone className='p-16 mt-10 border border-neutral-200' />
-
-        <h2 className='text-zinc-600'>After every adjustment of the uploaded documents, recreat the knowledge base</h2>
-        { /* consider removing this button from the UI once the embeddings are created ... */}
-        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
-
+        <div>
+          { /* consider removing this button from the UI once the embeddings are created ... */}
+          <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
+        </div>
       </div>
 
       <div className='container' style={{ display: trained ? "block" : "none" }}>
