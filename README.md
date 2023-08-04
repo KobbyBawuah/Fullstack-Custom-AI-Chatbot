@@ -49,31 +49,33 @@ npm run start
 Open http://localhost:3000 with your browser to access the application.
 
 ## Usage
-Once the application is running, visit http://localhost:3000 in your web browser.
+1. Once the application is running, visit http://localhost:3000 in your web browser.
 
-Upload your documents: Use the interface to upload the text or markdown files you want to use for interactions with the chatbot.
+2. Attach the files you want to train your chat bot on. Adjust the attached files as needed. 
 
-Start Interacting: The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
+3. Upload your documents for processing. 
 
-Continuous Interactions: The chatbot considers both the provided chat history and your questions to generate appropriate responses, allowing you to engage in continuous interactions.
+4. Train your chat bot on your documents by creating a knowledge base. 
 
+5. Start Interacting: The bot will show upfter it is done training. The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
 
+6. To add more files to the already processed files, just don't clean the saved files. Upload the new documents and retrain. 
 
-### Side Note
+# Side Note
 To adjust this bot to work with Notion there are two possible ways:
 
-### Manual 
+## Manual 
 1. You could export the .md files from Notion and run an unzip command to insert the files into the Notion DB directory.
 2. Then you could just adjust the directory path in the setup/route to point at the Notion_DB directory. 
 
-### Automatic
+## Automatic
 1. Load and update documents from Notion using the tool in llama hub:
 https://llamahub.ai/l/tools-notion 
 
 2. Adjust the code acordingly. 
 
 
-# TODO:
+#### TODO:
 //Ongoing -> update ui
 Done -> //get users to upload then click create index and embedding. If user deletes document. Clear trained value and past messages
 Done ->Delete documents button
