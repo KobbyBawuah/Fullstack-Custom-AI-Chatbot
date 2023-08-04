@@ -81,8 +81,8 @@ export default function Home() {
       <div className='container'>
         <h1 className='text-5xl font-bold'>Ask your PDF, Markdown documents or Text files 💬</h1>
         <h2 className='text-zinc-600'>After every adjustment of the uploaded documents, recreat the knowledge base</h2>
-        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwerror}>Click to throw frontend error</button>
-        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwapierror}>Click to throw API Route Error</button>
+        {/* <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwerror}>Click to throw frontend error</button>
+        <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={throwapierror}>Click to throw API Route Error</button> */}
       </div>
 
       <div className='container'>

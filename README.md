@@ -73,3 +73,15 @@ To adjust this bot to work with Notion there are two possible ways:
 https://llamahub.ai/l/tools-notion 
 
 2. Adjust the code acordingly. 
+
+
+# TODO:
+//Ongoing -> update ui
+Done -> //get users to upload then click create index and embedding. If user deletes document. Clear trained value and past messages
+Done ->Delete documents button
+DONE-> //when loading is done, show chat bot 
+  //set up history tracking
+  //instrument moderation
+  //look into setting up promts and keeping the last messages for context
+  //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
+  //create new index with an id for each load. This will allow users to make diffrent indexs in pinecone
