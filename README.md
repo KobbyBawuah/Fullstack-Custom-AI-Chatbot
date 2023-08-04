@@ -34,8 +34,6 @@ cp .example.env.local .env
 
 Update the .env file with your actual API keys for OpenAI and Pinecone.
 
-(Optional) - Add your own custom text or markdown files into the /documents folder. Currently, there is already a sample file in the documents folder.
-
 Run the app:
 locally=
 ```bash
