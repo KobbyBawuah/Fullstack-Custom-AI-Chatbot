@@ -130,7 +130,7 @@ const Dropzone = ({ className }) => {
                         onClick={deleteAllFiles}
                         className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
                     >
-                        Clean saved files
+                        Clean uploaded files
                     </button>
                 </div>
 

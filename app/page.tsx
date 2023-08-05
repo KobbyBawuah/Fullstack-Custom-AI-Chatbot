@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Dropzone from '../components/Dropzone';
 
+const Prompt = 'Your prompt: You are an AI assistant. If you don\'t have the information to answer to a question, please respond with the phrase "I am just a simple bot, I don\'t have that information in my custom knowledge base. PS. Kobby also said I shouldn\'t make shit up." Try to be a little funny when appropriate but stay factually correct when it comes to the answer you provide.'
 
 export default function Home() {
   const [query, setQuery] = useState('')
@@ -25,13 +26,16 @@ export default function Home() {
 
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
+    const message = Prompt + "Human: " + query + " " + "\n" + "AI: "
     if (!query) return
     setResult('')
     setLoading(true)
+    console.log("Rahhhh")
+    console.log(message)
     try {
       const result = await fetch('/api/read', {
         method: "POST",
-        body: JSON.stringify(query)
+        body: JSON.stringify(message)
       })
       const json = await result.json()
       setResult(json.data)
@@ -92,11 +96,12 @@ export default function Home() {
         <div>
           { /* consider removing this button from the UI once the embeddings are created ... */}
           <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
-          <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. It will appear below once the training is completed.</h2>
+          <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The bot will appear below once the training is completed.</h2>
         </div>
       </div>
 
       <div className='container' style={{ display: trained ? "block" : "none" }}>
+        {/* <div className='container'> */}
         <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask your AI</button>
 

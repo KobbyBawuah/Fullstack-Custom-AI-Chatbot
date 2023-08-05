@@ -80,9 +80,10 @@ https://llamahub.ai/l/tools-notion
 Done -> //get users to upload then click create index and embedding. If user deletes document. Clear trained value and past messages
 Done ->Delete documents button
 DONE-> //when loading is done, show chat bot 
+Done-> //look into setting up promts
   //set up history tracking
   //instrument moderation
-  //look into setting up promts and keeping the last messages for context
+  //button to bring the bot to life on already trained data
   //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
 
 If I decide to optimize for production
