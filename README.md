@@ -46,6 +46,11 @@ npm run build
 npm run start
 ```
 
+If you run into any issues querrying pinecone, make sure you are using node 18. You can run the command
+```bash
+nvm use 18 
+```
+
 Open http://localhost:3000 with your browser to access the application.
 
 ## Usage

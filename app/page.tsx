@@ -2,13 +2,12 @@
 import { useState } from 'react'
 import Dropzone from '../components/Dropzone';
 
-const Prompt = 'Your prompt: You are an AI assistant. If you don\'t have the information to answer to a question, please respond with the phrase "I am just a simple bot, I don\'t have that information in my custom knowledge base. PS. Kobby also said I shouldn\'t make shit up." Try to be a little funny when appropriate but stay factually correct when it comes to the answer you provide.'
-
 export default function Home() {
   const [query, setQuery] = useState('')
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [trained, setTrained] = useState(false)
+  const [previous_questions_and_answers, setPreviousQuestionsAndAnswers] = useState('');
 
   //sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents. 
   async function createIndexAndEmbeddings() {
@@ -23,14 +22,13 @@ export default function Home() {
       console.log('err:', err)
     }
   }
-
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
-    const message = Prompt + "Human: " + query + " " + "\n" + "AI: "
+    //send built message
     if (!query) return
     setResult('')
     setLoading(true)
-    console.log("Rahhhh")
+    const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
     console.log(message)
     try {
       const result = await fetch('/api/read', {
@@ -39,6 +37,10 @@ export default function Home() {
       })
       const json = await result.json()
       setResult(json.data)
+      //append question and answer for context
+      setPreviousQuestionsAndAnswers(
+        prev => prev + "Human: " + query + " " + "AI: " + json.data + " "
+      );
       setLoading(false)
     } catch (err) {
       console.log('err:', err)
@@ -100,8 +102,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='container' style={{ display: trained ? "block" : "none" }}>
-        {/* <div className='container'> */}
+      {/* <div className='container' style={{ display: trained ? "block" : "none" }}> */}
+      <div className='container'>
         <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask your AI</button>
 
