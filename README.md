@@ -81,15 +81,21 @@ https://llamahub.ai/l/tools-notion
 
 
 #### TODO:
-//Ongoing -> update ui
+```bash
 Done -> //get users to upload then click create index and embedding. If user deletes document. Clear trained value and past messages
 Done ->Delete documents button
 DONE-> //when loading is done, show chat bot 
-Done-> //look into setting up promts
-  //set up history tracking
+Done -> //set up history tracking
   //instrument moderation
   //button to bring the bot to life on already trained data
   //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
+```
+
+```bash
+If I have time:
+  //Ongoing -> update ui
+  //look into setting up promts
+```
 
 If I decide to optimize for production
 //create new index with an id for each load. This will allow users to make diffrent indexs in pinecone
