@@ -82,7 +82,7 @@ https://llamahub.ai/l/tools-notion
 
 #### TODO:
 ```bash
-Done -> //get users to upload then click create index and embedding. If user deletes document. Clear trained value and past messages
+Done -> //get users to upload then click create index and embedding. Give users the ability to delete uploaded files.
 Done ->Delete documents button
 DONE-> //when loading is done, show chat bot 
 Done -> //set up history tracking
