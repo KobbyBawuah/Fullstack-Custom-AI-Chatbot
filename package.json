@@ -23,6 +23,7 @@
     "formidable": "^3.5.0",
     "langchain": "^0.0.121",
     "next": "13.4.12",
+    "openai": "^3.3.0",
     "pdf-parse": "^1.1.1",
     "postcss": "8.4.27",
     "react": "18.2.0",

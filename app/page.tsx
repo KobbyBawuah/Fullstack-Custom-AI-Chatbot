@@ -22,10 +22,16 @@ export default function Home() {
       console.log('err:', err)
     }
   }
+
+  async function showChatbot() {
+    setTrained(true)
+  }
+
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
     //send built message
     if (!query) return
+    //implement moderation when you have time
     setResult('')
     setLoading(true)
     const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
@@ -95,15 +101,16 @@ export default function Home() {
         {/* Upload section */}
         <h1 className='text-3xl font-bold'>Upload Files</h1>
         <Dropzone className='p-16 mt-10 border border-neutral-200' />
-        <div>
+        <div className='flex justify-between mt-4'>
           { /* consider removing this button from the UI once the embeddings are created ... */}
           <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={createIndexAndEmbeddings}>Create Knowledge base</button>
-          <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The bot will appear below once the training is completed.</h2>
+          <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={showChatbot}>Ask your already created Knowledge base</button>
         </div>
+        <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The bot will appear below once the training is completed.</h2>
       </div>
 
-      {/* <div className='container' style={{ display: trained ? "block" : "none" }}> */}
-      <div className='container'>
+      <div className='container' style={{ display: trained ? "block" : "none" }}>
+        {/* <div className='container'> */}
         <input className='text-black px-2 py-1' onChange={e => setQuery(e.target.value)} />
         <button className="px-7 py-1 rounded-2xl bg-white text-black mt-2 mb-2" onClick={sendQuery}>Ask your AI</button>
 

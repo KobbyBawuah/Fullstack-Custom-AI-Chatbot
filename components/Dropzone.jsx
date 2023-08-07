@@ -112,29 +112,7 @@ const Dropzone = ({ className }) => {
             <section className='mt-10'>
                 <div className='flex gap-4'>
                     <h2 className='title text-3xl font-semibold'>Preview</h2>
-                    <button
-                        type='button'
-                        onClick={removeAll}
-                        className='mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-white transition-colors'
-                    >
-                        Remove all files
-                    </button>
-                    <button
-                        type='submit'
-                        className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
-                    >
-                        Upload Files for processing
-                    </button>
-                    <button
-                        type='button'
-                        onClick={deleteAllFiles}
-                        className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
-                    >
-                        Clean uploaded files
-                    </button>
                 </div>
-
-
                 {/* Accepted files */}
                 <h3 className='title text-lg font-semibold text-neutral-600 mt-10 border-b pb-3'>
                     Accepted Files
@@ -193,6 +171,29 @@ const Dropzone = ({ className }) => {
                         </li>
                     ))}
                 </ul>
+
+                <div className='flex gap-4 mt-6'>
+                    <button
+                        type='button'
+                        onClick={removeAll}
+                        className='mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-white transition-colors'
+                    >
+                        Remove all previewed files
+                    </button>
+                    <button
+                        type='submit'
+                        className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
+                    >
+                        Send Files for processing
+                    </button>
+                    <button
+                        type='button'
+                        onClick={deleteAllFiles}
+                        className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
+                    >
+                        Clean sent files
+                    </button>
+                </div>
             </section>
         </form >
     )

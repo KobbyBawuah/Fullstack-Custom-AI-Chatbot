@@ -86,15 +86,15 @@ Done -> //get users to upload then click create index and embedding. Give users 
 Done ->Delete documents button
 DONE-> //when loading is done, show chat bot 
 Done -> //set up history tracking
-  //instrument moderation
-  //button to bring the bot to life on already trained data
+Done->  //button to bring the bot to life on already trained data
   //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
 ```
 
 ```bash
-If I have time:
+To do:
   //Ongoing -> update ui
-  //look into setting up promts
+  //look into implementing prompts
+  //instrument moderation
 ```
 
 If I decide to optimize for production

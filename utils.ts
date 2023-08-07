@@ -4,6 +4,8 @@ import { OpenAI } from "langchain/llms/openai";
 import { loadQAStuffChain } from 'langchain/chains';
 import { Document } from 'langchain/document';
 import { indexName, timeout } from "./config";
+import { Configuration, OpenAIApi } from 'openai';
+// import openai from 'openai';
 
 //creating pinecone index
 export const createPineconeIndex = async (
@@ -158,5 +160,24 @@ export const queryVectorStoreAndLLM = async (
     } else {
         // Log that there are no matches, so no query will be made
         console.log('Since there are no matches, GPT-3 will not be queried.');
+    }
+};
+
+export const getModeration = async (question) => {
+    try {
+        const configuration = new Configuration({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
+
+        const openaiClient = new OpenAIApi(configuration);
+        const response = await openaiClient.createModeration({
+            input: question,
+        });
+        return response.data
+
+    } catch (error) {
+        // Handle any errors that may occur during the API call
+        console.error('Error during moderation check from utils functions:', error);
+        return error;
     }
 };
