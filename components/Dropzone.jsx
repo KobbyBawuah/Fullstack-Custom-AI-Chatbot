@@ -104,14 +104,14 @@ const Dropzone = ({ className }) => {
                 {
                     isDragActive ?
                         <p>Drop the files here ...</p> :
-                        <p>Drag 'n' drop some files here, or click to select files</p>
+                        <p>Drag 'n' drop some files here, or click this area to select files</p>
                 }
             </div>
 
             {/* Preview */}
             <section className='mt-10'>
                 <div className='flex gap-4'>
-                    <h2 className='title text-3xl font-semibold'>Preview</h2>
+                    <h2 className='title text-3xl font-semibold tracking-wide'>Preview</h2>
                 </div>
                 {/* Accepted files */}
                 <h3 className='title text-lg font-semibold text-neutral-600 mt-10 border-b pb-3'>
@@ -176,7 +176,7 @@ const Dropzone = ({ className }) => {
                     <button
                         type='button'
                         onClick={removeAll}
-                        className='mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-secondary-400 rounded-md px-3 hover:bg-secondary-400 hover:text-white transition-colors'
+                        className='mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
                     >
                         Remove all previewed files
                     </button>
@@ -191,7 +191,7 @@ const Dropzone = ({ className }) => {
                         onClick={deleteAllFiles}
                         className='ml-auto mt-1 text-[12px] uppercase tracking-wider font-bold text-neutral-500 border border-purple-400 rounded-md px-3 hover:bg-purple-400 hover:text-white transition-colors'
                     >
-                        Clean sent files
+                        Delete all sent files
                     </button>
                 </div>
             </section>

@@ -87,15 +87,20 @@ Done ->Delete documents button
 DONE-> //when loading is done, show chat bot 
 Done -> //set up history tracking
 Done->  //button to bring the bot to life on already trained data
-  //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
+Done->  button to show demo workflow
 ```
 
 ```bash
 To do:
   //Ongoing -> update ui
+  the x button of files
+  alert pop up on create
+  automatically scroll when bot shows
+   //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
+
   //look into implementing prompts
-  //instrument moderation
+  //instrument moderation following sister instrumentaion
 ```
 
 If I decide to optimize for production
-//create new index with an id for each load. This will allow users to make diffrent indexs in pinecone
+//create new index with an id for each load. This will allow users to make diffrent indexs in my pinecone
