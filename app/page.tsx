@@ -1,8 +1,9 @@
 'use client'
 import React from 'react';
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect, useRef } from 'react'
 import Dropzone from '../components/Dropzone';
 import Banner from '../components/Banner'
+import Modal from '../components/Modal'
 import { Button } from '@/components/Button';
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -16,10 +17,14 @@ export default function Home() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [buttonDisabled1, setButtonDisabled1] = useState(false);
   const [open, setOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const bottomContainerRef = useRef(null);
 
   //sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents. 
   async function createIndexAndEmbeddings() {
-    setButtonDisabled1(true);
+    setButtonDisabled1(true)
+    handleBotCreationNote()
     try {
       const result = await fetch('/api/setup', {
         method: "POST"
@@ -36,6 +41,10 @@ export default function Home() {
   async function showChatbot() {
     setTrained(true)
     setButtonDisabled(true);
+  }
+
+  function handleBotCreationNote() {
+    setModalOpen(true);
   }
 
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
@@ -97,6 +106,12 @@ export default function Home() {
       </div>
     );
   }
+
+  useEffect(() => {
+    if (trained && bottomContainerRef.current) {
+      bottomContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [trained]);
 
   return (
     <div>
@@ -233,8 +248,10 @@ export default function Home() {
             <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddings} disabled={buttonDisabled1}>Create Knowledge base</Button>
             <Button className=" mt-4 mb-4" onClick={showChatbot} disabled={buttonDisabled}>Ask your already created Knowledge base</Button>
           </div>
-          <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The chat bot will appear below once the training is completed.</h2>
+          {/* <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The chat bot will appear below once the training is completed.</h2> */}
         </div>
+
+        <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
         <div className='container' style={{ display: trained ? "block" : "none" }}>
           {/* <div className='container'> */}
@@ -278,6 +295,7 @@ export default function Home() {
               <p className="text-lg text-gray-800">{result}</p>
             </div>
           )}
+          <div ref={bottomContainerRef} />
         </div>
       </section>
     </div>

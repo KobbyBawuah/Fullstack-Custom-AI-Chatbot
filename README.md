@@ -82,25 +82,8 @@ https://llamahub.ai/l/tools-notion
 
 #### TODO:
 ```bash
-Done -> //get users to upload then click create index and embedding. Give users the ability to delete uploaded files.
-Done ->Delete documents button
-DONE-> //when loading is done, show chat bot 
-Done -> //set up history tracking
-Done->  //button to bring the bot to life on already trained data
-Done->  button to show demo workflow
+  1. look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
+  2. look into implementing prompts for later prompt engineering
+  3.instrument moderation following sister instrumentaion
+  4. If I decide to optimize for production, create new index with an id for each load. This will allow users to make diffrent indexs in my pinecone. will be adeal to tie it to a user id
 ```
-
-```bash
-To do:
-  //Ongoing -> update ui
-  the x button of files
-  alert pop up on create
-  automatically scroll when bot shows
-   //look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
-
-  //look into implementing prompts
-  //instrument moderation following sister instrumentaion
-```
-
-If I decide to optimize for production
-//create new index with an id for each load. This will allow users to make diffrent indexs in my pinecone
