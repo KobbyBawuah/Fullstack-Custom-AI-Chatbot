@@ -7,9 +7,6 @@ To run this app, you need the following:
 - An [OpenAI API](https://platform.openai.com/) key: You can obtain an API key from the OpenAI website. (OPtional)-> You could consider setting the OPENAI_API_ORG.
 - [Pinecone API Key](https://app.pinecone.io/organizations/-NalvPDNU4OBLzvzVC7t/projects/gcp-starter:5718e41/indexes): To use Pinecone as the vector database, you need a Pinecone API key. You will also need to set the environment. Make sure your Pinecone environment is an actual environment given to you by Pinecone, like `us-west4-gcp-free`.
 
-## Up and Running (Website)
-To use the web application, follow this link:
-
 
 ## Up and Running (Developer)
 To run the app locally, follow these steps:
@@ -23,8 +20,6 @@ cd Fullstack-Notion-Chatbot
 Install the dependencies using either NPM or Yarn:
 ```bash
 npm install
-# or
-yarn
 ```
 
 Copy the details of .example.env.local to a new file called .env and update it with your API keys and environment:
@@ -34,7 +29,12 @@ cp .example.env.local .env
 
 Update the .env file with your actual API keys for OpenAI and Pinecone.
 
-Run the app:
+Make sure you are using node 18. You can run the command
+```bash
+nvm use 18 
+```
+
+#### Run the app:
 locally=
 ```bash
 npm run dev
@@ -46,17 +46,16 @@ npm run build
 npm run start
 ```
 
-If you run into any issues querrying pinecone, make sure you are using node 18. You can run the command
-```bash
-nvm use 18 
-```
-
 Open http://localhost:3000 with your browser to access the application.
+
+
+## Up and Running (Website)
+Not yet deployed
 
 ## Usage
 1. Once the application is running, visit http://localhost:3000 in your web browser.
 
-2. Attach the files you want to train your chat bot on. Adjust the attached files as needed. 
+2. Attach the files you want to train your chat bot on. Adjust the attached files as needed. Sample file -> constitution.txt.
 
 3. Upload your documents for processing. 
 
@@ -64,7 +63,18 @@ Open http://localhost:3000 with your browser to access the application.
 
 5. Start Interacting: The bot will show upfter it is done training. The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
 
-6. To add more files to the already processed files, just don't clean the saved files. Upload the new documents and retrain. 
+6. To add more files to the already processed files, just don't clean the saved files and upload the new documents to retrain. 
+
+Sample questions and their expected answers based on the custom document currently provided are as follows:
+- Who is the creator of this chatbot? ---> Answer: Kwabena
+- Who is his Girlfriend? ---> Answer: Kemi
+- Who is his father? --> Answer: Information not provided in data
+- Who wrote the constitution? ---> Answer: Kwabena
+- Does he live in Nigeria? ---> Answer: No, Canada
+- What did the people of the United States do in order to form a more perfect Union? --> Answer: This is just a general question to ensure functionality. 
+- Summarize the constitution? --> Answer: General question as well to ensure functionality.
+
+To exit the chatbot, press `Ctrl + C`
 
 # Side Note
 To adjust this bot to work with Notion there are two possible ways:
@@ -79,11 +89,16 @@ https://llamahub.ai/l/tools-notion
 
 2. Adjust the code acordingly. 
 
+#### Example of Interface:
+Example of Interface:
+![Example image of interface](images/interface1.png)
+![Preview](images/interface2.png)
+![SearchBot example](images/interface3.png)
 
 #### TODO:
 ```bash
   1. look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
   2. look into implementing prompts for later prompt engineering
-  3.instrument moderation following sister instrumentaion
+  3. instrument moderation following sister instrumentaion
   4. If I decide to optimize for production, create new index with an id for each load. This will allow users to make diffrent indexs in my pinecone. will be adeal to tie it to a user id
 ```
