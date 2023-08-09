@@ -94,11 +94,3 @@ Example of Interface:
 ![Example image of interface](images/interface1.png)
 ![Preview](images/interface2.png)
 ![SearchBot example](images/interface3.png)
-
-#### TODO:
-```bash
-  1. look into loading screen when the bot is creating embedings and the index, for file upload and saved files deleation
-  2. look into implementing prompts for later prompt engineering
-  3. instrument moderation following sister instrumentaion
-  4. If I decide to optimize for production, create new index with an id for each load. This will allow users to make diffrent indexs in my pinecone. will be adeal to tie it to a user id
-```

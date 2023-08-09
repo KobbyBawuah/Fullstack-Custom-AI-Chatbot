@@ -95,6 +95,20 @@ const Dropzone = ({ className }) => {
         }
     }
 
+    function getFileImage(fileName) {
+        const fileExtension = fileName.split('.').pop().toLowerCase();
+        switch (fileExtension) {
+            case 'md':
+                return 'markdown_image.png';
+            case 'pdf':
+                return 'pdf_image.png';
+            case 'txt':
+                return 'text_image.png';
+            default:
+                return 'default_image.png';
+        }
+    }
+
     return (
         <form onSubmit={onSubmit}>
             <div {...getRootProps({
@@ -121,7 +135,7 @@ const Dropzone = ({ className }) => {
                     {files.map(file => (
                         <li key={file.name} className='relative h-32 rounded-md shadow-lg'>
                             <Image
-                                src={file.preview}
+                                src={`/images/${getFileImage(file.name)}`}
                                 alt={file.name}
                                 width={100}
                                 height={100}
