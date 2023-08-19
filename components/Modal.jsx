@@ -43,7 +43,7 @@ export default function Modal({ modalOpen, setModalOpen }) {
                                             </Dialog.Title>
                                             <div className="mt-2">
                                                 <p className="text-sm text-gray-500">
-                                                    The chatbot may require some time to complete its training. It will become available for use below as soon as the training process is finished.</p>
+                                                    The chatbot may require some time to complete its training. It will pop up for use below as soon as the training process is finished.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@ export default function Modal({ modalOpen, setModalOpen }) {
                                         onClick={() => setModalOpen(false)}
                                         ref={cancelButtonRef}
                                     >
-                                        Cancel
+                                        Ok
                                     </button>
                                 </div>
                             </Dialog.Panel>
