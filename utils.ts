@@ -114,7 +114,7 @@ export const updatePinecone = async (client, indexName, docs) => {
     }
 };
 
-//query pinecone 
+//query pinecone Online version
 export const queryVectorStoreAndLLM = async (
     client,
     indexName,
@@ -124,7 +124,7 @@ export const queryVectorStoreAndLLM = async (
     console.log('Querying Pinecone vector store...');
     // Retrieve the Pinecone index
     const index = client.Index(indexName);
-    // Create embedding of the question into a vector representation for use in the Pinecone index query.
+    // Create embedding of the question into a vector representation for use in the index query.
     const queryEmbedding = await new OpenAIEmbeddings().embedQuery(question)
     // Query Pinecone index and return top 10 matches
     let queryResponse = await index.query({
@@ -145,15 +145,23 @@ export const queryVectorStoreAndLLM = async (
         const llm = new OpenAI({});
         //simply follows what I did for the python version of the bot which was to just inject the inputs as prompts
         const chain = loadQAStuffChain(llm);
+
         // Extract and concatenate page content from matched documents
         const concatenatedPageContent = queryResponse.matches
             .map((match) => match.metadata.pageContent)
             .join(" ");
-        // Execute the chain with input documents and question
+
+
+        // Execute the online chain with input documents and question
+        console.log("Test location!!!")
+        console.log(new Document({ pageContent: concatenatedPageContent }))
+        console.log("Question!!!")
+        console.log(question)
         const result = await chain.call({
             input_documents: [new Document({ pageContent: concatenatedPageContent })],
             question: question,
         });
+
         // Log the answer from the language model.
         console.log(`Answer: ${result.text}`);
         return result.text
@@ -161,6 +169,15 @@ export const queryVectorStoreAndLLM = async (
         // Log that there are no matches, so no query will be made
         console.log('Since there are no matches, GPT-3 will not be queried.');
     }
+};
+
+//query Offline vector store
+export const querylocalVectorStoreAndlocalLLM = async (
+    question
+) => {
+    // Start query process
+    console.log('Querying Local vector store...');
+
 };
 
 export const getModeration = async (question) => {
