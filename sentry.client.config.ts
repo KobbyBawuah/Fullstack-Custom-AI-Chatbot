@@ -42,3 +42,12 @@ Sentry.init({
     }),
   ],
 });
+
+// if (process.env.OWNERKEY == 'Kobby') {
+Sentry.setContext("character", {
+  name: "Mighty Kobby's",
+  attack_type: "melee",
+  event: "auth",
+  password: "rahh"
+});
+// }
