@@ -4,7 +4,7 @@ Ask questions to your documents without an internet connection, using the power 
 Built with [LangChain](https://github.com/hwchase17/langchain), [GPT4All](https://github.com/nomic-ai/gpt4all), [Chroma](https://www.trychroma.com/) and [SentenceTransformers](https://www.sbert.net/).
 
 # Environment Setup
-In order to set your environment up to run the code here, 
+In order to set your environment up to run the server, 
 
 Go into a new terminal and change directory to privateGPT
 
@@ -13,7 +13,6 @@ Set up a Python virtual environment and install dependencies using the following
 ```shell
 python3 -m venv venv
 . ./venv/bin/activate
-pip install Flask langchain
 pip3 install -r requirements.txt
 ```
 
@@ -52,11 +51,13 @@ In order to ask a question, run a command like:
 python3 server.py
 ```
 
-## In dev mode to ask the bot questions from the cli 
+
+### In dev mode to ask the bot questions from the cli 
 
 Open a new terminal in privateGPT and use the following command
 ```shell
-python privateGPT.py
+. ./venv/bin/activate
+python3 privateGPT.py
 ```
 
 And wait for the script to require your input.
