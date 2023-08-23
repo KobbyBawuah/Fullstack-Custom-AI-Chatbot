@@ -16,8 +16,10 @@ export default function Home() {
   const [previous_questions_and_answers, setPreviousQuestionsAndAnswers] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [buttonDisabled1, setButtonDisabled1] = useState(false);
+  const [buttonDisabled2, setButtonDisabled2] = useState(false);
   const [open, setOpen] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
+  //create state for if local button is clicked
 
   const bottomContainerRef = useRef(null);
 
@@ -38,9 +40,54 @@ export default function Home() {
     setButtonDisabled1(false);
   }
 
+  //sends a request to the backend local server to create the index and generate embeddings for the documents locally. 
+  async function createIndexAndEmbeddingslocally() {
+    setButtonDisabled2(true)
+
+    //create a version of this app
+    // handleBotCreationNote()
+
+    try {
+      const result = await fetch('http://localhost:5000/run_ingest', {
+        method: "POST"
+      });
+      const json = await result.json();
+      setTrained(true);
+      console.log('result from local: ', json);
+    } catch (err) {
+      console.log('err:', err);
+    }
+    setButtonDisabled2(false);
+  }
+
   async function showChatbot() {
     setTrained(true)
     setButtonDisabled(true);
+  }
+
+  async function deleteKnowledgebase() {
+    //local DB deletion
+    try {
+      const result = await fetch('http://localhost:5000/delete-vectorstore', {
+        method: "POST"
+      });
+      const json = await result.json();
+      setTrained(true);
+      console.log('result from local: ', json);
+    } catch (err) {
+      console.log('err:', err);
+    }
+
+    //pinecone deletion
+    try {
+      const result = await fetch('/api/dbdelete', {
+        method: "POST"
+      })
+      const json = await result.json()
+      console.log('result: ', json)
+    } catch (err) {
+      console.log('err:', err)
+    }
   }
 
   function handleBotCreationNote() {
@@ -49,6 +96,12 @@ export default function Home() {
 
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
+
+
+    //pass in state of local button to change the function used 
+
+
+
     //send built message
     if (!query) return
     //implement moderation when you have time
@@ -245,8 +298,10 @@ export default function Home() {
           <Dropzone className='p-16 mt-10 border border-neutral-200' />
           <div className='flex justify-between mt-4'>
             { /* consider removing this button from the UI once the embeddings are created ... */}
-            <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddings} disabled={buttonDisabled1}>Create Knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddings} disabled={buttonDisabled1}>Create Knowledge base using OpenAI</Button>
             <Button className=" mt-4 mb-4" onClick={showChatbot} disabled={buttonDisabled}>Ask your already created Knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddingslocally} disabled={buttonDisabled2}>Create private knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={deleteKnowledgebase}>Delete Knowledge bases</Button>
           </div>
           {/* <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The chat bot will appear below once the training is completed.</h2> */}
         </div>

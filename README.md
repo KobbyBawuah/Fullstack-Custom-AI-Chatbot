@@ -48,18 +48,26 @@ npm run start
 
 Open http://localhost:3000 with your browser to access the application.
 
+#### If you wish use the completely private version: 
+
+Open a new terminal and change directory to the privateGPT directory and follow the README.md
 
 ## Up and Running (Website)
 Not yet deployed
 
-## Usage
+
+
+
+# Usage
 1. Once the application is running, visit http://localhost:3000 in your web browser.
 
-2. Attach the files you want to train your chat bot on. Adjust the attached files as needed. Sample file -> constitution.txt.
+2. If you already have knowledge bases created, ask away. 
+
+2. If you don't have knowledge bases created, you will have to attach the files you want to train your chat bot on. Adjust the attached files as needed. Sample file -> constitution.txt.
 
 3. Upload your documents for processing. 
 
-4. Train your chat bot on your documents by creating a knowledge base. 
+4. Train your chat bot on your documents by creating a knowledge base. You can select the OpenAI version which of course uses OPENAI LLM and is highly optimized but not private or you can select the completely private version but uses the GPT4All language model on your system which of course is not the most accurate or optimized. 
 
 5. Start Interacting: The bot will show upfter it is done training. The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
 
