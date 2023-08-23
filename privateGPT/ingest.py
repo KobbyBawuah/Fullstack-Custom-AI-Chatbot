@@ -21,9 +21,20 @@ from constants import CHROMA_SETTINGS
 class NoDocumentsFoundError(Exception):
     pass
 
+import sentry_sdk
+from sentry_sdk import capture_exception
+
 
 load_dotenv()
 
+sentry_sdk.init(
+    dsn="https://f23424f295d8e523993eec840fee97d0@o1145044.ingest.sentry.io/4505755832549376",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+)
 
 # Load environment variables
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
@@ -93,6 +104,7 @@ def does_vectorstore_exist(persist_directory: str) -> bool:
     """
     Checks if vectorstore exists
     """
+
     if os.path.exists(os.path.join(persist_directory, 'index')):
         if os.path.exists(os.path.join(persist_directory, 'chroma-collections.parquet')) and os.path.exists(os.path.join(persist_directory, 'chroma-embeddings.parquet')):
             list_index_files = glob.glob(os.path.join(persist_directory, 'index/*.bin'))
@@ -103,6 +115,7 @@ def does_vectorstore_exist(persist_directory: str) -> bool:
     return False
 
 def main():
+
     # Create embeddings
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
 

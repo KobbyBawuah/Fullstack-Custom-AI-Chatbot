@@ -8,8 +8,18 @@ from langchain.llms import GPT4All, LlamaCpp
 import os
 import argparse
 import time
+import sentry_sdk
 
 load_dotenv()
+
+sentry_sdk.init(
+    dsn="https://f23424f295d8e523993eec840fee97d0@o1145044.ingest.sentry.io/4505755832549376",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+)
 
 embeddings_model_name = os.environ.get("EMBEDDINGS_MODEL_NAME")
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
@@ -23,6 +33,9 @@ target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS',4))
 from constants import CHROMA_SETTINGS
 
 def main():
+    # division_by_zero = 1 / 0
+
+
     # Parse the command line arguments
     args = parse_arguments()
     embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)

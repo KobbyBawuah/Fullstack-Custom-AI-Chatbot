@@ -8,6 +8,9 @@ import os
 import shutil
 import glob
 from dotenv import load_dotenv
+import sentry_sdk
+from flask import Flask
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 
 load_dotenv()
@@ -18,6 +21,18 @@ origins = [
     "http://127.0.0.1",
     "http://127.0.0.1:8000"
 ]
+
+sentry_sdk.init(
+    dsn="https://f23424f295d8e523993eec840fee97d0@o1145044.ingest.sentry.io/4505755832549376",
+    integrations=[
+        FlaskIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
 
 app = Flask(__name__)
 
@@ -63,7 +78,10 @@ def delete_vectorstore_route():
     else:
         return jsonify({"message": "Missing 'persist_directory' parameter."}), 400
 
-
+@app.route('/debug-sentry', methods=['POST'])
+def trigger_error():
+  division_by_zero = 1 / 0
+  return jsonify({"message": "Error triggered successfully."}), 200
 
 
 if __name__ == '__main__':
