@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  //change the fav icon
   title: 'Vault Whisper',
   description: 'Ask your PDFs, Markdown documents, or Text files 💬',
 }
