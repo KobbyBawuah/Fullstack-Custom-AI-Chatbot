@@ -56,22 +56,24 @@ Open a new terminal and change directory to the privateGPT directory and follow 
 Not yet deployed
 
 
-
-
 # Usage
 1. Once the application is running, visit http://localhost:3000 in your web browser.
 
 2. If you already have knowledge bases created, ask away. 
 
-2. If you don't have knowledge bases created, you will have to attach the files you want to train your chat bot on. Adjust the attached files as needed. Sample file -> constitution.txt.
+## Note 
 
-3. Upload your documents for processing. 
+If you wish to use the Bot in moderation mode, you will require internet connection and you will need to be running the privateGPT server. For moderation, it uses the OpenAI moderation end point. Ofcourse expect the bot to take a little longer to reply.
 
-4. Train your chat bot on your documents by creating a knowledge base. You can select the OpenAI version which of course uses OPENAI LLM and is highly optimized but not private or you can select the completely private version but uses the GPT4All language model on your system which of course is not the most accurate or optimized. 
+3. If you don't have knowledge bases created, you will have to attach the files you want to train your chat bot on. Adjust the attached files as needed. Sample file -> constitution.txt.
 
-5. Start Interacting: The bot will show upfter it is done training. The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
+4. Upload your documents for processing. 
 
-6. To add more files to the already processed files, just don't clean the saved files and upload the new documents to retrain. 
+5. Train your chat bot on your documents by creating a knowledge base. You can select the OpenAI version which of course uses OPENAI LLM and is highly optimized but not private or you can select the completely private version but uses the GPT4All language model on your system which of course is not the most accurate or optimized. 
+
+6. Start Interacting: The bot will show upfter it is done training. The app will use Pinecone to store document embeddings and OpenAI's language model (GPT-3) to answer your questions based on the uploaded documents.
+
+7. To add more files to the already processed files, just don't clean the saved files and upload the new documents to retrain. 
 
 Sample questions and their expected answers based on the custom document currently provided are as follows:
 - Who is the creator of this chatbot? ---> Answer: Kwabena
@@ -82,7 +84,10 @@ Sample questions and their expected answers based on the custom document current
 - What did the people of the United States do in order to form a more perfect Union? --> Answer: This is just a general question to ensure functionality. 
 - Summarize the constitution? --> Answer: General question as well to ensure functionality.
 
-To exit the chatbot, press `Ctrl + C`
+To exit the chatbot UI, press `Ctrl + C` in the terminal for the frontend
+
+#### To shut down the privateGPT server
+Press Ctrl + C, and then deactivate the virtual environment using the `deactivate` command in that server.
 
 # Side Note
 To adjust this bot to work with Notion there are two possible ways:

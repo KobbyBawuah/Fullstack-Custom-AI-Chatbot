@@ -9,14 +9,25 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: '1rem',
-        md: '1.5rem',
-        lg: '2rem'
+    extend: {
+      colors: {
+        primary: '#3490dc',
+        danger: '#e3342f',
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          md: '1.5rem',
+          lg: '2rem'
+        }
       }
-    }
+    },
   },
-  plugins: []
-}
+  variants: {},
+  plugins: [],
+};
+
+
+
+

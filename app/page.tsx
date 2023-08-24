@@ -5,8 +5,6 @@ import Dropzone from '../components/Dropzone';
 import Banner from '../components/Banner';
 import Modal from '../components/Modal';
 import { Button } from '@/components/Button';
-// import { Dialog, Transition } from '@headlessui/react'
-// import { XMarkIcon } from '@heroicons/react/24/outline'
 import WorkflowSlider from '../components/Slider';
 import ChatBot from '../components/ChatBot';
 
@@ -255,7 +253,7 @@ export default function Home() {
           {/* <div className='container'> */}
 
           {/* Could make the below section another component not a priotity currently*/}
-          <ChatBot sendQuery={sendQuery} setQuery={setQuery} />
+          <ChatBot sendQuery={sendQuery} setQuery={setQuery} moderation={moderation} setmoderation={setmoderation} />
           {/* Could make this another component not a priotity currently* ^^^^^^/}
 
           {/* If the loading state is true, it displays the loading message, and if the result state is not empty, it displays the result obtained from the server. */}

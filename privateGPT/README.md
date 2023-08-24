@@ -36,11 +36,9 @@ EMBEDDINGS_MODEL_NAME: SentenceTransformers embeddings model name (see https://w
 TARGET_SOURCE_CHUNKS: The amount of chunks (sources) that will be used to answer a question
 ```
 
-# Notes 
+# Note
 
-Note: Because of the way `langchain` loads the `SentenceTransformers` embeddings, the first time you run the script it will require internet connection to download the embeddings model itself.
-
-Note: If you wish to use the Bot in moderation mode, you will require internet connection to use the OpenAI moderation end point. Ofcourse expect the bot to take a little longer to get responses. 
+Note: Because of the way `langchain` loads the `SentenceTransformers` embeddings, the first time you run the script it will require internet connection to download the embeddings model itself. 
 
 # Run the server and return to UI
 
