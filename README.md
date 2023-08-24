@@ -48,7 +48,7 @@ npm run start
 
 Open http://localhost:3000 with your browser to access the application.
 
-#### If you wish use the completely private version: 
+## If you wish use the completely private version (Highly ADVISED to run it anyway): 
 
 Open a new terminal, change directory to the privateGPT directory and follow the README.md in that directory
 
