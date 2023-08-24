@@ -100,6 +100,14 @@ def delete_vectorstore(persist_directory):
     else:
         return False
 
+def check_vectorstore(persist_directory):
+    if os.path.exists(persist_directory):
+        print(f"Local DB exists")
+        return True
+    else:
+        print(f"Local DB does not exist")
+        return False
+
 def build_bot(persist_directory):
     global openQA
     if os.path.exists(persist_directory):
@@ -135,6 +143,17 @@ def delete_vectorstore_route():
             return jsonify({"message": "Vector store deleted successfully."}), 200
         else:
             return jsonify({"message": "Error deleting vector store."}), 500
+    else:
+        return jsonify({"message": "Missing 'persist_directory' parameter."}), 400
+
+@app.route('/localdbcheck', methods=['POST'])
+def localdbcheck_route():
+    if persist_directory:
+        success = check_vectorstore(persist_directory)
+        if success:
+            return jsonify({"message": "Local DB created."}), 200
+        else:
+            return jsonify({"message": "No Local DB created."}), 500
     else:
         return jsonify({"message": "Missing 'persist_directory' parameter."}), 400
 

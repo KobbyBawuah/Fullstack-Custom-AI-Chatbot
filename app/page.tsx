@@ -20,7 +20,9 @@ export default function Home() {
   const [open, setOpen] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [localLLM, setLocalLLM] = useState(false)
-  const [moderation, setmoderation] = useState(false)
+  const [moderation, setmoderation] = useState(false);
+  const [localDBState, setlocalDBState] = useState(false)
+  const [OpenAiDBState, setOpenAiDBState] = useState(false)
   //create state for if local button is clicked
 
   const bottomContainerRef = useRef(null);
@@ -93,6 +95,43 @@ export default function Home() {
       });
       const json = await result.json();
       console.log('result from local: ', json);
+    } catch (err) {
+      console.log('err:', err);
+    }
+  }
+
+  async function checkDatabaseStates() {
+    //pinecone check
+    try {
+      const result = await fetch('/api/dbcheck', {
+        method: "POST"
+      })
+      const json = await result.json()
+      if (result.status === 200) {
+        console.log('Result from DB check: ', json);
+        setOpenAiDBState(true)
+      } else {
+        console.log('Result from DB check: ', json);
+        setOpenAiDBState(false)
+      }
+    } catch (err) {
+      console.log('err in pinecone DB check:', err)
+    }
+
+    //local DB check
+    try {
+      const result = await fetch('http://localhost:5000/localdbcheck', {
+        method: "POST"
+      });
+      const json = await result.json();
+      if (result.status === 200) {
+        console.log('Result from LocalDB check: ', json);
+        setlocalDBState(true)
+      } else {
+        console.log('Result from LocalDBDB check: ', json);
+        setlocalDBState(false)
+      }
+      //change state of localDBState if exists
     } catch (err) {
       console.log('err:', err);
     }
@@ -208,6 +247,7 @@ export default function Home() {
   }
 
   useEffect(() => {
+    checkDatabaseStates()
     if (trained && bottomContainerRef.current) {
       bottomContainerRef.current.scrollIntoView({ behavior: 'smooth' });
     }

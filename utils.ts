@@ -59,6 +59,25 @@ export const deletePineconeIndex = async (
     }
 };
 
+//Check pinecone index
+export const checkPineconeIndex = async (
+    // Pinecone client 
+    client,
+    indexName
+) => {
+    // Get list of existing indexes
+    const existingIndexes = await client.listIndexes();
+
+    if (existingIndexes.includes(indexName)) {
+        // If index exists
+        console.log(`"${indexName}" exisits`);
+        return true
+    } else {
+        console.log(`"${indexName}" not found so does not exisit.`);
+        return false
+    }
+};
+
 
 //upload to indexes 
 export const updatePinecone = async (client, indexName, docs) => {
