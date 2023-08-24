@@ -2,9 +2,12 @@
 import { useEffect, useState } from "react";
 import Header from "../../components/new-ui/header";
 import Chat from "@/components/new-ui/Chat";
+import ChatSelector from "@/components/new-ui/ChatSelector";
+import Setup from "@/components/new-ui/Setup";
 
 export default function NewUI() {
-  const [screen, setScreen] = useState("chat");
+  const [screen, setScreen] = useState("home");
+  const [local, setLocal] = useState(null);
 
   useEffect(() => {
     // TODO: Check for any chat setups
@@ -12,11 +15,34 @@ export default function NewUI() {
 
   let content;
   switch (screen) {
+    case "home":
+      content = (
+        <ChatSelector
+          onSelect={(isLocal) => {
+            setLocal(isLocal);
+
+            const exists = true;
+            if (exists) {
+              setScreen("chat");
+            } else {
+              setScreen("setup");
+            }
+          }}
+        />
+      );
+      break;
     case "chat":
       content = <Chat />;
       break;
     case "setup":
-      content = <div>this is setup</div>;
+      content = (
+        <Setup
+          isLocal={local}
+          onSetupComplete={() => {
+            setScreen("chat");
+          }}
+        />
+      );
       break;
     default:
       content = <Chat />;
@@ -24,10 +50,13 @@ export default function NewUI() {
   }
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between" style={{ height: "100vh" }}>
       <Header
-        onAsk={() => setScreen("chat")}
-        onSetup={() => setScreen("setup")}
+        onHome={() => {
+          setScreen("home");
+          setLocal(null);
+        }}
+        isLocal={local}
       />
       {content}
     </div>

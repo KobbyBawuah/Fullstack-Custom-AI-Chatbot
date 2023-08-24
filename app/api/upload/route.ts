@@ -6,6 +6,7 @@ export async function POST(request: NextRequest) {
 
     const files = data.getAll('file');
 
+    console.log(files)
     if (!files || files.length === 0) {
         return NextResponse.json({ success: false });
     }
@@ -13,6 +14,7 @@ export async function POST(request: NextRequest) {
     const fileWrites = files.map(async (file, index) => {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
+        console.log(file)
         const path = `documents/${file.name}`;
 
         await fs.writeFile(path, buffer);
