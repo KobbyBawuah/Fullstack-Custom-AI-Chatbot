@@ -54,7 +54,11 @@ function InputBar({ onSubmit }) {
 function Message({ type, message }) {
   if (type === "to") {
     return (
-      <div>
+      <div
+        style={{
+          marginTop: "8px",
+        }}
+      >
         You
         <div
           style={{
@@ -69,7 +73,7 @@ function Message({ type, message }) {
     );
   }
   return (
-    <div>
+    <div style={{ marginTop: "8px" }}>
       <div style={{ marginLeft: "auto", width: "50%" }}>Whisper</div>
       <div
         style={{
@@ -99,7 +103,11 @@ export default function Chat() {
         <div>
           {messages.map((message, index) => {
             return (
-              <Message key={`{message}-{index}`} type="to" message={message} />
+              <Message
+                key={`{message}-{index}`}
+                type={message.user ? "to" : "from"}
+                message={message.value}
+              />
             );
           })}
         </div>
@@ -131,7 +139,11 @@ export default function Chat() {
       </div>
       <InputBar
         onSubmit={(value) => {
-          const newMessages = [...messages, value];
+          const newMessages = [
+            ...messages,
+            { user: true, value },
+            { user: false, value: "I don't know" }, // Mock response
+          ];
           setMessages(newMessages);
         }}
       />

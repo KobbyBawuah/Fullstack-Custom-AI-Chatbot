@@ -4,7 +4,7 @@ export default function Header({ onAsk, onSetup }) {
   return (
     <div
       className="flex flex-row justify-between px-4 items-center"
-      style={{ height: "32px", background: colors.red400 }}
+      style={{ height: "32px", background: colors.purple200 }}
     >
       <button onClick={onAsk}>Ask</button>
       <div>Some Label</div>
