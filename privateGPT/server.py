@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 import os
 import time
 import shutil
+import openai
 import glob
 from dotenv import load_dotenv
 import sentry_sdk
@@ -54,6 +55,39 @@ CORS(app, allow_headers="*", send_wildcard=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 openQA = None
+
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def get_moderation(question):
+  """
+  Check if the question is safe to ask the model
+
+  Parameters:
+    question (str): The question to check
+
+  Returns a list of errors if the question is not safe, otherwise returns None
+  """
+
+  errors = {
+        "hate": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity, religion, nationality, sexual orientation, disability status, or caste.",
+        "hate/threatening": "Hateful content that also includes violence or serious harm towards the targeted group.",
+        "self-harm": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders.",
+        "sexual": "Content meant to arouse sexual excitement, such as the description of sexual activity, or that promotes sexual services (excluding sex education and wellness).",
+        "sexual/minors": "Sexual content that includes an individual who is under 18 years old.",
+        "violence": "Content that promotes or glorifies violence or celebrates the suffering or humiliation of others.",
+        "violence/graphic": "Violent content that depicts death, violence, or serious physical injury in extreme graphic detail.",
+  }
+  response = openai.Moderation.create(input=question)
+  if response.results[0].flagged:
+      # get the categories that are flagged and generate a message
+      result = [
+        error
+        for category, error in errors.items()
+        if response.results[0].categories[category]
+      ]
+      return result
+  return None
 
 def delete_vectorstore(persist_directory):
     if os.path.exists(persist_directory):
@@ -110,7 +144,22 @@ def trigger_error():
     division_by_zero = 1 / 0
     return jsonify({"message": "Error triggered successfully."}), 200
 
-@app.route('/ask-bot', methods=['POST'])
+@app.route('/moderate-question', methods=['POST'])
+def moderate_question():
+    try:
+        data = request.get_json()
+        question = data
+        if question is None:
+            return jsonify({"error": "Question not provided"}), 400
+        moderation_errors = get_moderation(question)
+        if moderation_errors:
+            return jsonify({"errors": moderation_errors}), 400
+        else:
+            return jsonify({"message": "Question is safe"}), 200
+    except Exception as e:
+        return jsonify({'error in moderate-question route': str(e)}), 500    
+
+@app.route('/', methods=['POST'])
 def ask_bot():
     try:
         data = request.get_json()  # Get the JSON data from the request body

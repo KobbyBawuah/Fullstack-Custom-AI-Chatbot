@@ -36,14 +36,11 @@ EMBEDDINGS_MODEL_NAME: SentenceTransformers embeddings model name (see https://w
 TARGET_SOURCE_CHUNKS: The amount of chunks (sources) that will be used to answer a question
 ```
 
-Note: because of the way `langchain` loads the `SentenceTransformers` embeddings, the first time you run the script it will require internet connection to download the embeddings model itself.
+# Notes 
 
-## Instructions for ingesting your own dataset
+Note: Because of the way `langchain` loads the `SentenceTransformers` embeddings, the first time you run the script it will require internet connection to download the embeddings model itself.
 
-Note: during the ingest process no data leaves your local environment. You could ingest without an internet connection, except for the first time you run the ingest script, when the embeddings model is downloaded.
-
-## Ask questions to your documents, locally!
-In order to ask a question, run a command like:
+Note: If you wish to use the Bot in moderation mode, you will require internet connection to use the OpenAI moderation end point. Ofcourse expect the bot to take a little longer to get responses. 
 
 # Run the server and return to UI
 
@@ -51,7 +48,8 @@ In order to ask a question, run a command like:
 python3 server.py
 ```
 
-Type `exit` to finish the script or press Ctrl + C, and then deactivate the virtual environment using the `deactivate` command.
+#### To shut down server
+Press Ctrl + C, and then deactivate the virtual environment using the `deactivate` command.
 
 
 # How does it work?

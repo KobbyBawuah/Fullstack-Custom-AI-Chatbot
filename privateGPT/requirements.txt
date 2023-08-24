@@ -15,3 +15,4 @@ pypandoc==1.11
 tqdm==4.65.0
 sentence_transformers==2.2.2
 sentry-sdk==1.29.2
+openai>=0.27.0

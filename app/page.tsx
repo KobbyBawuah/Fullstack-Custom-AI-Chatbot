@@ -22,6 +22,7 @@ export default function Home() {
   const [open, setOpen] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [localLLM, setLocalLLM] = useState(false)
+  const [moderation, setmoderation] = useState(false)
   //create state for if local button is clicked
 
   const bottomContainerRef = useRef(null);
@@ -47,9 +48,7 @@ export default function Home() {
   //sends a request to the backend local server to create the index and generate embeddings for the documents locally. 
   async function createIndexAndEmbeddingslocally() {
     setButtonDisabled2(true)
-
-    //create a version of this app
-    // handleBotCreationNote()
+    handleBotCreationNote()
 
     try {
       const result = await fetch('http://localhost:5000/run_ingest', {
@@ -108,6 +107,28 @@ export default function Home() {
     setResult('')
     setLoading(true)
 
+    if (moderation) {
+      try {
+        const result = await fetch('http://localhost:5000/moderate-question', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON because I was getting an error
+          },
+          //Just pass querry if you wish to reduce burden on local model to not keep context of conversation
+          body: JSON.stringify(query)
+        })
+        const json = await result.json()
+        if (result.status !== 200) {
+          console.log('Moderation failed:');
+          const errorMessage = json.errors.join(', '); // Join errors if there are multiple
+          alert('Question moderation failed: ' + errorMessage + 'You will need to reload the page to continue');
+          return
+        }
+      } catch (err) {
+        console.log('err: An error occurred while moderating the question:', err)
+      }
+    }
+
     if (!localLLM) {
       const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
       console.log(message)
@@ -134,6 +155,7 @@ export default function Home() {
           headers: {
             'Content-Type': 'application/json'  // Set the content type to JSON because I was getting an error
           },
+          //Just pass querry if you wish to reduce burden on local model to not keep context of conversation
           body: JSON.stringify(message)
         })
         const json = await result.json()
@@ -213,10 +235,10 @@ export default function Home() {
           <div className='flex justify-between mt-4'>
             { /* consider removing this button from the UI once the embeddings are created ... */}
             <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddings} disabled={buttonDisabled1}>Create Knowledge base using OpenAI</Button>
-            <Button className=" mt-4 mb-4" onClick={showChatbot} disabled={buttonDisabled}>Ask your already created Knowledge base</Button>
             <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddingslocally} disabled={buttonDisabled2}>Create private knowledge base</Button>
-            <Button className=" mt-4 mb-4" onClick={deletelocalKnowledgebase}>Delete Local Knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={showChatbot} disabled={buttonDisabled}>Ask your already created Knowledge base</Button>
             <Button className=" mt-4 mb-4" onClick={deleteOpenAiKnowledgebase}>Delete OpenAI Knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={deletelocalKnowledgebase}>Delete Local Knowledge base</Button>
 
           </div>
           {/* <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The chat bot will appear below once the training is completed.</h2> */}
