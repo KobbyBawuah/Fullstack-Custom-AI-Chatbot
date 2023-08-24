@@ -122,11 +122,10 @@ def build_bot(persist_directory):
 def run_ingest():
     try:
         main()  # Call the main function with your logic
-        #start the privateGPT.py
         build_bot(persist_directory)
         return jsonify({"message": "Files ingest executed and LLM built successfully"})
     except Exception as e:
-        return jsonify({"error: There was a fail during the ingestion of files or the building of the LLM": str(e)}), 500
+        return jsonify({"error": "There was a fail during the ingestion of files or the building of the LLM: " + str(e)}), 500
 
 @app.route('/delete-vectorstore', methods=['POST'])
 def delete_vectorstore_route():

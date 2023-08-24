@@ -55,8 +55,13 @@ export default function Home() {
         method: "POST"
       });
       const json = await result.json();
-      setTrained(true);
-      console.log('result from local: ', json);
+      if (result.status !== 200) {
+        console.log('result from local: ', json);
+        const errorMessage = json.error
+        alert('Issue when trying to run ingest: ' + errorMessage + '. Go ahead and add more files or click the "Ask already created knowledgebase"');
+      } else {
+        setTrained(true);
+      }
     } catch (err) {
       console.log('err:', err);
     }
