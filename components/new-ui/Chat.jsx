@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import Ellipsis from "react-animated-ellipsis";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 
 function EmptyMessage() {
   return (
@@ -8,16 +10,19 @@ function EmptyMessage() {
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
+        flexDirection: "column",
       }}
     >
-      oops empty
+      <ChatBubbleIcon
+        style={{ width: "200px", height: "200px", opacity: "0.6" }}
+      />
+      Start typing in the box below to start a conversation with your AI
     </div>
   );
 }
 
-function InputBar({ onSubmit }) {
+function InputBar({ onSubmit, isLocalLLM, onLoading }) {
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
   const [previousQuestionsAndAnswers, setPreviousQuestionsAndAnswers] =
     useState("");
 
@@ -26,11 +31,10 @@ function InputBar({ onSubmit }) {
     if (!query) return;
     //implement moderation when you have time
     // setResult("");
-    setLoading(true);
+    onLoading(true);
     console.log("blah", query);
 
     // TODO: implement moderation
-    const localLLM = false;
     const moderation = false;
     if (moderation) {
       try {
@@ -61,7 +65,7 @@ function InputBar({ onSubmit }) {
       }
     }
 
-    if (!localLLM) {
+    if (!isLocalLLM) {
       const message =
         previousQuestionsAndAnswers + "Human: " + query + " " + "\n" + "AI: ";
       // console.log(message);
@@ -90,8 +94,9 @@ function InputBar({ onSubmit }) {
             "Content-Type": "application/json", // Set the content type to JSON because I was getting an error
           },
           //Just pass querry if you wish to reduce burden on local model to not keep context of conversation
-          body: JSON.stringify(message),
+          body: JSON.stringify(query),
         });
+        console.log(query);
         const json = await result.json();
         console.log(json);
         onSubmit({ user: false, value: json.data });
@@ -103,7 +108,7 @@ function InputBar({ onSubmit }) {
         console.log("err:", err);
       }
     }
-    setLoading(false);
+    onLoading(false);
   }
 
   return (
@@ -147,14 +152,17 @@ function Message({ type, message }) {
       <div
         style={{
           marginTop: "8px",
+          marginLeft: "auto",
         }}
       >
-        You
+        <div style={{ width: "50%", marginLeft: "auto" }}>You</div>
         <div
           style={{
             background: "darkgray",
             padding: "8px",
             width: "50%",
+            borderRadius: "8px",
+            marginLeft: "auto",
           }}
         >
           {message}
@@ -164,13 +172,13 @@ function Message({ type, message }) {
   }
   return (
     <div style={{ marginTop: "8px" }}>
-      <div style={{ marginLeft: "auto", width: "50%" }}>Whisper</div>
+      <div style={{ width: "50%" }}>Whisper</div>
       <div
         style={{
           background: "darkgray",
           padding: "8px",
           width: "50%",
-          marginLeft: "auto",
+          borderRadius: "8px",
         }}
       >
         {message}
@@ -179,8 +187,9 @@ function Message({ type, message }) {
   );
 }
 
-export default function Chat() {
+export default function Chat({ isLocalLLM }) {
   const [messages, setMessages] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const isEmpty = messages.length === 0;
 
   let content;
@@ -194,12 +203,20 @@ export default function Chat() {
           {messages.map((message, index) => {
             return (
               <Message
-                key={`{message}-{index}`}
+                key={`${message}-${index}`}
                 type={message.user ? "to" : "from"}
                 message={message.value}
               />
             );
           })}
+          {isLoading && (
+            <div style={{ width: "50%", marginTop: "24px" }}>
+              <span>
+                Loading
+                <Ellipsis fontSize="1.5rem" />
+              </span>
+            </div>
+          )}
         </div>
       );
       break;
@@ -218,7 +235,7 @@ export default function Chat() {
           height: "100%",
           width: "100%",
           padding: "20px",
-          background: "grey",
+          background: "lightgray",
           overflowY: "auto",
           display: "flex",
           gap: "8px",
@@ -229,14 +246,10 @@ export default function Chat() {
       </div>
       <InputBar
         onSubmit={(value) => {
-          const newMessages = [
-            ...messages,
-            value,
-            // { user: true, value },
-            // // { user: false, value: "I don't know" }, // Mock response
-          ];
           setMessages((prevMessages) => [...prevMessages, value]);
         }}
+        onLoading={setLoading}
+        isLocalLLM={isLocalLLM}
       />
     </div>
   );

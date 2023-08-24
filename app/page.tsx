@@ -18,12 +18,12 @@ export default function Home() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [buttonDisabled1, setButtonDisabled1] = useState(false);
   const [buttonDisabled2, setButtonDisabled2] = useState(false);
-  const [open, setOpen] = useState(true)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [localLLM, setLocalLLM] = useState(false)
+  const [open, setOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [localLLM, setLocalLLM] = useState(false);
   const [moderation, setmoderation] = useState(false);
-  const [localDBState, setlocalDBState] = useState(false)
-  const [OpenAiDBState, setOpenAiDBState] = useState(false)
+  const [localDBState, setlocalDBState] = useState(false);
+  const [OpenAiDBState, setOpenAiDBState] = useState(false);
   //create state for if local button is clicked
 
   const bottomContainerRef = useRef(null);
@@ -61,8 +61,8 @@ export default function Home() {
         const errorMessage = json.error;
         alert(
           "Issue when trying to run ingest: " +
-          errorMessage +
-          '. Go ahead and add more files or click the "Ask already created knowledgebase"'
+            errorMessage +
+            '. Go ahead and add more files or click the "Ask already created knowledgebase"'
         );
       } else {
         setTrained(true);
@@ -108,37 +108,37 @@ export default function Home() {
   async function checkDatabaseStates() {
     //pinecone check
     try {
-      const result = await fetch('/api/dbcheck', {
-        method: "POST"
-      })
-      const json = await result.json()
+      const result = await fetch("/api/dbcheck", {
+        method: "POST",
+      });
+      const json = await result.json();
       if (result.status === 200) {
-        console.log('Result from DB check: ', json);
-        setOpenAiDBState(true)
+        console.log("Result from DB check: ", json);
+        setOpenAiDBState(true);
       } else {
-        console.log('Result from DB check: ', json);
-        setOpenAiDBState(false)
+        console.log("Result from DB check: ", json);
+        setOpenAiDBState(false);
       }
     } catch (err) {
-      console.log('err in pinecone DB check:', err)
+      console.log("err in pinecone DB check:", err);
     }
 
     //local DB check
     try {
-      const result = await fetch('http://localhost:5000/localdbcheck', {
-        method: "POST"
+      const result = await fetch("http://localhost:5000/localdbcheck", {
+        method: "POST",
       });
       const json = await result.json();
       if (result.status === 200) {
-        console.log('Result from LocalDB check: ', json);
-        setlocalDBState(true)
+        console.log("Result from LocalDB check: ", json);
+        setlocalDBState(true);
       } else {
-        console.log('Result from LocalDBDB check: ', json);
-        setlocalDBState(false)
+        console.log("Result from LocalDBDB check: ", json);
+        setlocalDBState(false);
       }
       //change state of localDBState if exists
     } catch (err) {
-      console.log('err:', err);
+      console.log("err:", err);
     }
   }
 
@@ -170,8 +170,8 @@ export default function Home() {
           const errorMessage = json.errors.join(", "); // Join errors if there are multiple
           alert(
             "Question moderation failed: " +
-            errorMessage +
-            "You will need to reload the page to continue"
+              errorMessage +
+              "You will need to reload the page to continue"
           );
           return;
         }
@@ -269,7 +269,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    checkDatabaseStates()
+    checkDatabaseStates();
     if (trained && bottomContainerRef.current) {
       bottomContainerRef.current.scrollIntoView({ behavior: "smooth" });
     }

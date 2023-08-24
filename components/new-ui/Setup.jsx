@@ -1,73 +1,96 @@
+import { useState } from "react";
 import { Button } from "../Button";
 import Dropzone from "../Dropzone";
 
-//sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents.
-async function createIndexAndEmbeddings() {
-  //   setLocalLLM(false);
-  //   setButtonDisabled1(true);
-  //   handleBotCreationNote();
-  try {
-    const result = await fetch("/api/setup", {
-      method: "POST",
-    });
-    const json = await result.json();
-    // setTrained(true);
-    console.log("result: ", json);
-  } catch (err) {
-    console.log("err:", err);
-  }
-  //   setButtonDisabled1(false);
-}
-
-//sends a request to the backend local server to create the index and generate embeddings for the documents locally.
-async function createIndexAndEmbeddingslocally() {
-  //   setButtonDisabled2(true);
-  //   handleBotCreationNote();
-
-  try {
-    const result = await fetch("http://localhost:5000/run_ingest", {
-      method: "POST",
-    });
-    const json = await result.json();
-    if (result.status !== 200) {
-      console.log("result from local: ", json);
-      const errorMessage = json.error;
-      alert(
-        "Issue when trying to run ingest: " +
-          errorMessage +
-          '. Go ahead and add more files or click the "Ask already created knowledgebase"'
-      );
-    } else {
-      //   setTrained(true);
-      console.log("trained");
-    }
-  } catch (err) {
-    console.log("err:", err);
-  }
-  //   setButtonDisabled2(false);
-  //   setLocalLLM(true);
-}
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function Setup({ isLocal, onSetupComplete }) {
+  const [loading, setLoading] = useState(false);
+
+  //sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents.
+  async function createIndexAndEmbeddings() {
+    setLoading(true);
+    try {
+      const result = await fetch("/api/setup", {
+        method: "POST",
+      });
+      const json = await result.json();
+      // setTrained(true);
+      console.log("result: ", json);
+    } catch (err) {
+      console.log("err:", err);
+    }
+    setLoading(false);
+  }
+
+  //sends a request to the backend local server to create the index and generate embeddings for the documents locally.
+  async function createIndexAndEmbeddingslocally() {
+    setLoading(true);
+    try {
+      const result = await fetch("http://localhost:5000/run_ingest", {
+        method: "POST",
+      });
+      const json = await result.json();
+      if (result.status !== 200) {
+        console.log("result from local: ", json);
+        const errorMessage = json.error;
+        // alert(
+        //   "Issue when trying to run ingest: " +
+        //     errorMessage +
+        //     '. Go ahead and add more files or click the "Ask already created knowledgebase"'
+        // );
+      } else {
+        //   setTrained(true);
+        console.log("trained");
+      }
+    } catch (err) {
+      console.log("err:", err);
+    }
+    setLoading(false);
+  }
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "40px",
+          flexDirection: "column",
+        }}
+      >
+        <h1>Training...</h1>
+        <div style={{ width: "70%" }}>
+          <LinearProgress />
+        </div>
+      </div>
+    );
+  }
+
   const button = isLocal ? (
     <Button
       className=" mt-4 mb-4"
-      onClick={() => {
-        createIndexAndEmbeddingslocally();
+      onClick={async () => {
+        await createIndexAndEmbeddingslocally();
         onSetupComplete();
       }}
-      //   disabled={buttonDisabled2}
+      disabled={loading}
+      loading={loading}
     >
       Create private knowledge base
     </Button>
   ) : (
     <Button
       className=" mt-4 mb-4"
-      onClick={() => {
-        createIndexAndEmbeddings();
+      onClick={async () => {
+        await createIndexAndEmbeddings();
         onSetupComplete();
       }}
-      //   disabled={buttonDisabled1}
+      disabled={loading}
+      loading={loading}
     >
       Create Knowledge base using OpenAI
     </Button>
