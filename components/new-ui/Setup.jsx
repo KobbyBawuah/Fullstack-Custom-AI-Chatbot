@@ -11,7 +11,7 @@ async function createIndexAndEmbeddings() {
       method: "POST",
     });
     const json = await result.json();
-    setTrained(true);
+    // setTrained(true);
     console.log("result: ", json);
   } catch (err) {
     console.log("err:", err);

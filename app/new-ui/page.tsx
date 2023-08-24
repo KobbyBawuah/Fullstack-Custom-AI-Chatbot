@@ -21,7 +21,7 @@ export default function NewUI() {
           onSelect={(isLocal) => {
             setLocal(isLocal);
 
-            const exists = false;
+            const exists = true;
             if (exists) {
               setScreen("chat");
             } else {
