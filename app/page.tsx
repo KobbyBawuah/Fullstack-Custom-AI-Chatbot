@@ -65,7 +65,20 @@ export default function Home() {
     setButtonDisabled(true);
   }
 
-  async function deleteKnowledgebase() {
+  async function deleteOpenAiKnowledgebase() {
+    //pinecone deletion
+    try {
+      const result = await fetch('/api/dbdelete', {
+        method: "POST"
+      })
+      const json = await result.json()
+      console.log('result: ', json)
+    } catch (err) {
+      console.log('err:', err)
+    }
+  }
+
+  async function deletelocalKnowledgebase() {
     //local DB deletion
     try {
       const result = await fetch('http://localhost:5000/delete-vectorstore', {
@@ -76,17 +89,6 @@ export default function Home() {
       console.log('result from local: ', json);
     } catch (err) {
       console.log('err:', err);
-    }
-
-    //pinecone deletion
-    try {
-      const result = await fetch('/api/dbdelete', {
-        method: "POST"
-      })
-      const json = await result.json()
-      console.log('result: ', json)
-    } catch (err) {
-      console.log('err:', err)
     }
   }
 
@@ -301,7 +303,9 @@ export default function Home() {
             <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddings} disabled={buttonDisabled1}>Create Knowledge base using OpenAI</Button>
             <Button className=" mt-4 mb-4" onClick={showChatbot} disabled={buttonDisabled}>Ask your already created Knowledge base</Button>
             <Button className=" mt-4 mb-4" onClick={createIndexAndEmbeddingslocally} disabled={buttonDisabled2}>Create private knowledge base</Button>
-            <Button className=" mt-4 mb-4" onClick={deleteKnowledgebase}>Delete Knowledge bases</Button>
+            <Button className=" mt-4 mb-4" onClick={deletelocalKnowledgebase}>Delete Local Knowledge base</Button>
+            <Button className=" mt-4 mb-4" onClick={deleteOpenAiKnowledgebase}>Delete OpenAI Knowledge base</Button>
+
           </div>
           {/* <h2 className='text-zinc-600'>Note: The chat bot may take sometime to train. The chat bot will appear below once the training is completed.</h2> */}
         </div>
