@@ -177,7 +177,7 @@ def moderate_question():
     except Exception as e:
         return jsonify({'error in moderate-question route': str(e)}), 500    
 
-@app.route('/', methods=['POST'])
+@app.route('/ask-bot', methods=['POST'])
 def ask_bot():
     try:
         data = request.get_json()  # Get the JSON data from the request body

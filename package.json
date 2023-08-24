@@ -14,6 +14,7 @@
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
     "@mui/icons-material": "^5.14.6",
+    "@mui/lab": "^5.0.0-alpha.141",
     "@mui/material": "^5.14.6",
     "@pinecone-database/pinecone": "^0.1.6",
     "@sentry/nextjs": "^7.61.0",
@@ -31,6 +32,7 @@
     "openai": "^3.3.0",
     "pdf-parse": "^1.1.1",
     "react": "18.2.0",
+    "react-animated-ellipsis": "^1.0.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "typescript": "5.1.6"
