@@ -101,7 +101,7 @@ https://llamahub.ai/l/tools-notion
 
 2. Adjust the code acordingly. 
 
-#### Example of Interface:
+#### Example of Interface(Not Updated):
 ![Example image of interface](images/interface1.png)
 ![Preview](images/interface2.png)
 ![SearchBot example](images/interface3.png)
