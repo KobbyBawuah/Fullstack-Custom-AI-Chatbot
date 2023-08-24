@@ -1,5 +1,5 @@
 # Full Stack implementation of the Custom AI Chat Bot(Notion Chatbot)
-This is a sister application to my the initial AIChatBot implementation found here: https://github.com/KobbyBawuah/AIChatBot. The aim of this version is to provide a user-friendly web interface, allowing users to simply visit a website, upload their documents, and start interacting with the chatbot powered by the OpenAI language model or a 100% private GPT. The first part of the application utilizes the OpenAI language model to generate responses to user input where as the local version currently uses the local GPT4 LLM to generate responses. It involves loading data provided by the user, querying an index made from that data, and engaging in continuous interactions with the user. By considering both the provided chat history and the user's questions, the chatbot generates appropriate responses. In short, this app takes uploaded files, embeds them into vectors, stores them into Pinecone or a local DB, and allows semantic searching of the data.
+This is a sister application to my the initial AIChatBot implementation found here: https://github.com/KobbyBawuah/AIChatBot. The aim of this version is to provide a user-friendly web interface, allowing users to simply visit a website, upload their documents, and start interacting with the chatbot powered by the OpenAI language model or a 100% private GPT. The first part of the application utilizes the OpenAI language model to generate responses to user input whereas the local version currently uses the local GPT4 LLM to generate responses. It involves loading data provided by the user, querying an index made from that data, and engaging in continuous interactions with the user. By considering both the provided chat history and the user's questions, the chatbot generates appropriate responses. In short, this app takes uploaded files, embeds them into vectors, stores them into Pinecone or a local DB, and allows semantic searching of the data whiles maintaining context over the last 10 interactions.
 
 
 ### Prerequisites
@@ -7,8 +7,7 @@ To run this app, you need the following:
 - An [OpenAI API](https://platform.openai.com/) key: You can obtain an API key from the OpenAI website. (OPtional)-> You could consider setting the OPENAI_API_ORG.
 - [Pinecone API Key](https://app.pinecone.io/organizations/-NalvPDNU4OBLzvzVC7t/projects/gcp-starter:5718e41/indexes): To use Pinecone as the vector database, you need a Pinecone API key. You will also need to set the environment. Make sure your Pinecone environment is an actual environment given to you by Pinecone, like `us-west4-gcp-free`.
 
-
-## Up and Running (Developer)
+# Up and Running (Developer)
 To run the app locally, follow these steps:
 
 Clone this repository:
@@ -35,12 +34,12 @@ nvm use 18
 ```
 
 #### Run the app:
-locally=
+locally:
 ```bash
 npm run dev
 ```
 
-production version=
+production version:
 ```bash
 npm run build
 npm run start
@@ -52,7 +51,7 @@ Open http://localhost:3000 with your browser to access the application.
 
 Open a new terminal, change directory to the privateGPT directory and follow the README.md in that directory
 
-## Up and Running (Website)
+# Up and Running (Website)
 Not yet deployed
 
 
