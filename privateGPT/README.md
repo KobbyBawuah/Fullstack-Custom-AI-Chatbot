@@ -51,27 +51,7 @@ In order to ask a question, run a command like:
 python3 server.py
 ```
 
-
-### In dev mode to ask the bot questions from the cli 
-
-Open a new terminal in privateGPT and use the following command
-```shell
-. ./venv/bin/activate
-python3 privateGPT.py
-```
-
-And wait for the script to require your input.
-
-```plaintext
-> Enter a query:
-```
-
-Hit enter. You'll need to wait 20-30 seconds (depending on your machine) while the LLM model consumes the prompt and prepares the answer. Once done, it will print the answer and the 4 sources it used as context from your documents; you can then ask another question without re-running the script, just wait for the prompt again.
-
-Note: you could turn off your internet connection, and the script inference would still work. No data gets out of your local environment.
-
 Type `exit` to finish the script or press Ctrl + C, and then deactivate the virtual environment using the `deactivate` command.
-
 
 
 # How does it work?
