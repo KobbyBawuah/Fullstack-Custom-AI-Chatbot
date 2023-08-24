@@ -53,8 +53,7 @@ app = Flask(__name__)
 CORS(app, allow_headers="*", send_wildcard=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# Load environment variables
-persist_directory = os.environ.get('PERSIST_DIRECTORY')
+openQA = None
 
 def delete_vectorstore(persist_directory):
     if os.path.exists(persist_directory):
@@ -67,16 +66,21 @@ def delete_vectorstore(persist_directory):
     else:
         return False
 
-def build_bot():
-    embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
-    db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
-    retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
-    try:
-        llm = GPT4All(model=model_path, max_tokens=model_n_ctx, backend='gptj', n_batch=model_n_batch, verbose=False)
-        return True
-    except Exception as e:
+def build_bot(persist_directory):
+    global openQA
+    if os.path.exists(persist_directory):
+        embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+        db = Chroma(persist_directory=persist_directory, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
+        retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
+        try:
+            llm = GPT4All(model=model_path, max_tokens=model_n_ctx, backend='gptj', n_batch=model_n_batch, verbose=False)
+            openQA = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents= False)
+            return True
+        except Exception as e:
             print(f"Error building the GPT4All LLM: {e}")
-    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents= False)
+            return False
+    else:
+        return False
 
 # Route to trigger the ingest logic
 @app.route('/run_ingest', methods=['POST'])
@@ -85,10 +89,10 @@ def run_ingest():
     try:
         main()  # Call the main function with your logic
         #start the privateGPT.py
-        build_bot()
+        build_bot(persist_directory)
         return jsonify({"message": "Files ingest executed and LLM built successfully"})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error: There was a fail during the ingestion of files or the building of the LLM": str(e)}), 500
 
 @app.route('/delete-vectorstore', methods=['POST'])
 def delete_vectorstore_route():
@@ -103,8 +107,35 @@ def delete_vectorstore_route():
 
 @app.route('/debug-sentry', methods=['POST'])
 def trigger_error():
-  division_by_zero = 1 / 0
-  return jsonify({"message": "Error triggered successfully."}), 200
+    division_by_zero = 1 / 0
+    return jsonify({"message": "Error triggered successfully."}), 200
+
+@app.route('/ask-bot', methods=['POST'])
+def ask_bot():
+    try:
+        data = request.get_json()  # Get the JSON data from the request body
+        query = data  # Assuming the query is passed as a key in the JSON data
+        print(query)
+        print(openQA)
+
+        if query and openQA:
+            print("\n\n> Question:")
+            print(query)
+            # Call the 'qa' function to get the response
+            res = openQA(query)
+            answer = res['result']
+            print("Answer:")
+            print(answer)
+
+            # Building the response JSON
+            response = {
+                'data': answer
+            }
+            return jsonify(response), 200  # Return the response with a success status code
+        else:
+            return jsonify({'error': 'Question not provided to backend'}), 400  # Bad request if no query provided
+    except Exception as e:
+        return jsonify({'error in ask-bot route': str(e)}), 500 
 
 
 if __name__ == '__main__':

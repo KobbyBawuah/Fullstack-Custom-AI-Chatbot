@@ -19,12 +19,14 @@ export default function Home() {
   const [buttonDisabled2, setButtonDisabled2] = useState(false);
   const [open, setOpen] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
+  const [localLLM, setLocalLLM] = useState(false)
   //create state for if local button is clicked
 
   const bottomContainerRef = useRef(null);
 
   //sends a POST request to the backend route:/api/setup endpoint to create the index and generate embeddings for the documents. 
   async function createIndexAndEmbeddings() {
+    setLocalLLM(false)
     setButtonDisabled1(true)
     handleBotCreationNote()
     try {
@@ -58,6 +60,7 @@ export default function Home() {
       console.log('err:', err);
     }
     setButtonDisabled2(false);
+    setLocalLLM(true)
   }
 
   async function showChatbot() {
@@ -85,7 +88,6 @@ export default function Home() {
         method: "POST"
       });
       const json = await result.json();
-      setTrained(true);
       console.log('result from local: ', json);
     } catch (err) {
       console.log('err:', err);
@@ -98,35 +100,51 @@ export default function Home() {
 
   //sends a POST request to the backend route:/api/read endpoint with the user's question as the request body
   async function sendQuery() {
-
-
     //pass in state of local button to change the function used 
-
-
-
-    //send built message
     if (!query) return
     //implement moderation when you have time
     setResult('')
     setLoading(true)
-    const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
-    console.log(message)
-    try {
-      const result = await fetch('/api/read', {
-        method: "POST",
-        body: JSON.stringify(message)
-      })
-      const json = await result.json()
-      setResult(json.data)
-      //append question and answer for context
-      setPreviousQuestionsAndAnswers(
-        prev => prev + "Human: " + query + " " + "AI: " + json.data + " "
-      );
-      setLoading(false)
-    } catch (err) {
-      console.log('err:', err)
-      setLoading(false)
+
+    if (!localLLM) {
+      const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
+      console.log(message)
+      try {
+        const result = await fetch('/api/read', {
+          method: "POST",
+          body: JSON.stringify(message)
+        })
+        const json = await result.json()
+        setResult(json.data)
+        //append question and answer for context
+        setPreviousQuestionsAndAnswers(
+          prev => prev + "Human: " + query + " " + "AI: " + json.data + " "
+        );
+      } catch (err) {
+        console.log('err:', err)
+      }
+    } else {
+      const message = previous_questions_and_answers + "Human: " + query + " " + "\n" + "AI: "
+      console.log(message)
+      try {
+        const result = await fetch('http://localhost:5000/ask-bot', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'  // Set the content type to JSON because I was getting an error
+          },
+          body: JSON.stringify(message)
+        })
+        const json = await result.json()
+        setResult(json.data)
+        //append question and answer for context
+        setPreviousQuestionsAndAnswers(
+          prev => prev + "Human: " + query + " " + "AI: " + json.data + " "
+        );
+      } catch (err) {
+        console.log('err:', err)
+      }
     }
+    setLoading(false)
   }
 
   function throwerror() {
