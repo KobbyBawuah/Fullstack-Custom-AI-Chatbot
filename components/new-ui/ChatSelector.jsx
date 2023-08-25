@@ -85,12 +85,15 @@ function SelectorPanel({
           style={{ width: "100px", height: "100px", opacity: "0.6" }}
         />
       )}
-      {label}
+      <div style={{ fontSize: "2em", textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+        {label}
+      </div>
+
       {exists && (
         <div
           style={{
             position: "relative",
-            top: "80px",
+            top: "60px",
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
@@ -183,26 +186,26 @@ export default function ChatSelector({
       }}
     >
       <SelectorPanel
-        label="remote"
+        label="OpenAI ChatBot"
         onClick={() => onSelect(false, remoteExists)}
         exists={remoteExists}
         loading={loading}
         onDelete={() => {
           deleteOpenAiKnowledgebase();
-          onDelete("remote");
+          onDelete("OpenAI ChatBot");
         }}
         onUpload={() => {
           onUpload(false);
         }}
       />
       <SelectorPanel
-        label="local"
+        label="Local ChatBot"
         onClick={() => onSelect(true, localExists)}
         exists={localExists}
         loading={loading}
         onDelete={() => {
           deletelocalKnowledgebase();
-          onDelete("local");
+          onDelete("Local ChatBot");
         }}
         onUpload={() => {
           onUpload(true);

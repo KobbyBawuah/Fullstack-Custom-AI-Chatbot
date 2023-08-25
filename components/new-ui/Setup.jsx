@@ -97,10 +97,25 @@ export default function Setup({ isLocal, onSetupComplete }) {
   );
 
   return (
-    <div style={{ padding: "20px", flex: 1 }}>
-      <h1 className="text-3xl font-semibold tracking-wide">Upload Files</h1>
-      <Dropzone className="p-16 mt-10 border border-neutral-200" />
-      <div style={{ display: "flex", justifyContent: "center" }}>{button}</div>
+    <div>
+      <section className="flex flex-col gap-2 py-10">
+        <div className="container">
+          <h1 className="text-5xl font-semibold tracking-wide">
+            Ask your PDFs, Markdown documents or Text files 💬
+          </h1>
+          <hr></hr>
+          <hr></hr>
+          <hr></hr>
+          <hr></hr>
+        </div>
+        <div className="container">
+          <div style={{ padding: "20px", flex: 1 }}>
+            <h1 className="text-3xl font-semibold tracking-wide">Upload Files</h1>
+            <Dropzone className="p-16 mt-10 border border-neutral-200" />
+            <div style={{ display: "flex", justifyContent: "center" }}>{button}</div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import { Fragment, useState, useEffect, useRef } from "react";
-import Dropzone from "../components/Dropzone";
-import Banner from "../components/Banner";
-import Modal from "../components/Modal";
+import Dropzone from "../../components/Dropzone";
+import Banner from "../../components/Banner";
+import Modal from "../../components/Modal";
 import { Button } from "@/components/Button";
-import WorkflowSlider from "../components/Slider";
-import ChatBot from "../components/ChatBot";
+import WorkflowSlider from "../../components/Slider";
+import ChatBot from "../../components/ChatBot";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -61,8 +61,8 @@ export default function Home() {
         const errorMessage = json.error;
         alert(
           "Issue when trying to run ingest: " +
-            errorMessage +
-            '. Go ahead and add more files or click the "Ask already created knowledgebase"'
+          errorMessage +
+          '. Go ahead and add more files or click the "Ask already created knowledgebase"'
         );
       } else {
         setTrained(true);
@@ -170,8 +170,8 @@ export default function Home() {
           const errorMessage = json.errors.join(", "); // Join errors if there are multiple
           alert(
             "Question moderation failed: " +
-              errorMessage +
-              "You will need to reload the page to continue"
+            errorMessage +
+            "You will need to reload the page to continue"
           );
           return;
         }

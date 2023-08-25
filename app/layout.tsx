@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   //change the fav icon
-  title: 'Vault Whisper',
+  title: 'Vault Whisperer',
   description: 'Ask your PDFs, Markdown documents, or Text files 💬',
 }
 

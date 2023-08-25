@@ -52,8 +52,8 @@ function InputBar({ onSubmit, isLocalLLM, onLoading }) {
           const errorMessage = json.errors.join(", "); // Join errors if there are multiple
           alert(
             "Question moderation failed: " +
-              errorMessage +
-              "You will need to reload the page to continue"
+            errorMessage +
+            "You will need to reload the page to continue"
           );
           return;
         }

@@ -1,15 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import Header from "../../components/new-ui/header";
+import Header from "../components/new-ui/header";
 import Chat from "@/components/new-ui/Chat";
 import ChatSelector from "@/components/new-ui/ChatSelector";
 import Setup from "@/components/new-ui/Setup";
+import WorkflowSlider from "../components/Slider";
+import Banner from "../components/Banner"
 
 export default function NewUI() {
   const [screen, setScreen] = useState("home");
   const [local, setLocal] = useState(null);
   const [localDBState, setlocalDBState] = useState(null);
   const [OpenAiDBState, setOpenAiDBState] = useState(null);
+  const [open, setOpen] = useState(true);
 
   async function checkDatabaseStates() {
     //pinecone check
@@ -75,7 +78,7 @@ export default function NewUI() {
             }
           }}
           onDelete={(type) => {
-            if (type === "local") {
+            if (type === "Local ChatBot") {
               setlocalDBState(false);
             } else {
               setOpenAiDBState(false);
@@ -104,15 +107,16 @@ export default function NewUI() {
   }
 
   return (
-    <div className="flex flex-col justify-between" style={{ height: "100vh" }}>
-      <Header
-        onHome={() => {
-          setScreen("home");
-          setLocal(null);
-        }}
-        isLocal={local}
-      />
-      {content}
+    <div>
+      {/* Another possible component */}
+      <WorkflowSlider open={open} setOpen={setOpen} />
+      <Banner screen={screen} open={open} setOpen={setOpen} setScreen={setScreen} setLocal={setLocal} local={local} />
+      {screen === "home" && (
+        <h1 style={{ fontSize: "8em", textAlign: "center", marginTop: "1rem", fontFamily: "Impact, sans-serif" }}>Vault Whisperer</h1>
+      )}
+      <div className="flex flex-col justify-between" style={{ height: "60vh" }}>
+        {content}
+      </div>
     </div>
   );
 }

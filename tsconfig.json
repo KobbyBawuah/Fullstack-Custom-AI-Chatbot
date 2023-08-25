@@ -35,10 +35,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/page.tsx",
+    "app/oldUI/page.tsx",
     "components/Dropzone.jsx",
     "app/new-ui/page.jsx"
-   ],
+  ],
   "exclude": [
     "node_modules"
   ]
