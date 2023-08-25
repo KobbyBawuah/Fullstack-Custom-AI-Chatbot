@@ -62,8 +62,8 @@ function SelectorPanel({
   return (
     <div
       style={{
-        height: "400px",
-        width: "400px",
+        height: "450px",
+        width: "450px",
         background: "lightgray",
         display: "flex",
         flexDirection: "column",
@@ -93,7 +93,7 @@ function SelectorPanel({
         <div
           style={{
             position: "relative",
-            top: "60px",
+            top: "90px",
             display: "flex",
             width: "100%",
             justifyContent: "space-between",

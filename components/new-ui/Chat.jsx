@@ -115,7 +115,7 @@ function InputBar({ onSubmit, isLocalLLM, onLoading }) {
   return (
     <div >
       <div className="px-4 py- rounded-t-lg text-center">
-        <h1 className="text-xl font-semibold mb-4">Moderation Settings</h1>
+        <h1 className="text-xl font-semibold mb-4">Moderation Setting</h1>
         <div>
           <ModerationToggle moderation={moderation} setmoderation={setmoderation} />
         </div>
