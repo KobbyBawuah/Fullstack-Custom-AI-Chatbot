@@ -13,7 +13,7 @@ export default function Header({ onHome, isLocal }) {
         </Fab>
       </Box>
       {isLocal !== null && (
-        <div>{isLocal ? "Local Chatbot" : "OpenAI Chatbot"}</div>
+        <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{isLocal ? "Local Chatbot" : "OpenAI Chatbot"}</div>
       )}
       <div />
     </div>

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Ellipsis from "react-animated-ellipsis";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ModerationToggle from '../ModerationToggle'
 
 function EmptyMessage() {
   return (
@@ -23,8 +24,9 @@ function EmptyMessage() {
 
 function InputBar({ onSubmit, isLocalLLM, onLoading }) {
   const [query, setQuery] = useState("");
-  const [previousQuestionsAndAnswers, setPreviousQuestionsAndAnswers] =
-    useState("");
+  const [previousQuestionsAndAnswers, setPreviousQuestionsAndAnswers] = useState("");
+  const [moderation, setmoderation] = useState(false);
+
 
   async function sendQuery() {
     //pass in state of local button to change the function used
@@ -34,8 +36,6 @@ function InputBar({ onSubmit, isLocalLLM, onLoading }) {
     onLoading(true);
     console.log("blah", query);
 
-    // TODO: implement moderation
-    const moderation = false;
     if (moderation) {
       try {
         const result = await fetch("http://localhost:5000/moderate-question", {
@@ -50,12 +50,13 @@ function InputBar({ onSubmit, isLocalLLM, onLoading }) {
         if (result.status !== 200) {
           console.log("Moderation failed:");
           const errorMessage = json.errors.join(", "); // Join errors if there are multiple
+          onLoading(false);
           alert(
             "Question moderation failed: " +
             errorMessage +
             "You will need to reload the page to continue"
           );
-          return;
+          window.location.reload();
         }
       } catch (err) {
         console.log(
@@ -112,34 +113,43 @@ function InputBar({ onSubmit, isLocalLLM, onLoading }) {
   }
 
   return (
-    <div className="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-      <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
-        <label htmlFor="comment" className="sr-only">
-          Your question
-        </label>
-        <textarea
-          id="comment"
-          rows={4}
-          className="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Ask you question here..."
-          required
-          value={query}
-        ></textarea>
+    <div >
+      <div className="px-4 py- rounded-t-lg text-center">
+        <h1 className="text-xl font-semibold mb-4">Moderation Settings</h1>
+        <div>
+          <ModerationToggle moderation={moderation} setmoderation={setmoderation} />
+        </div>
       </div>
-      <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-        <div className="w-full flex flex-col items-center justify-center">
-          <button
-            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-            onClick={() => {
-              onSubmit({ user: true, value: query });
-              setQuery("");
-              sendQuery();
-            }}
-            disabled={query.length === 0}
-          >
-            Ask your AI
-          </button>
+
+      <div className="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div className="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+          <label htmlFor="comment" className="sr-only">
+            Your question
+          </label>
+          <textarea
+            id="comment"
+            rows={4}
+            className="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Ask you question here..."
+            required
+            value={query}
+          ></textarea>
+        </div>
+        <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+          <div className="w-full flex flex-col items-center justify-center">
+            <button
+              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+              onClick={() => {
+                onSubmit({ user: true, value: query });
+                setQuery("");
+                sendQuery();
+              }}
+              disabled={query.length === 0}
+            >
+              Ask your AI
+            </button>
+          </div>
         </div>
       </div>
     </div>

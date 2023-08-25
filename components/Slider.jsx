@@ -64,19 +64,19 @@ const WorkflowSlider = ({ open, setOpen }) => {
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Utilize Existing Knowledge Base: </strong>
-                                                        If you've previously trained your chat bot and want to leverage that knowledge, simply choose the option labeled "Ask your already created Knowledge base" located at the lower right corner of the user interface.
+                                                        Upon Load, if you've previously trained your chat bot and it exists, you can simply choose the option with the data base symbol. You can update that knowledge base by clicking on the arrow at the bottom of that button. If you wish to delete the knowledge base, click on the trash can.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Training with New Data: </strong>
-                                                        Should you opt to train your chat bot with fresh data, begin by uploading your relevant documents. This can be achieved by selecting the appropriate files. For your convenience, a preview section is available to review the uploaded documents.
+                                                        Should you opt to train your chat bot with fresh data, click on the appropriate chat bot with a plus symbol. It should open the Setup view. Uploading your relevant documents by clicking or draging and dropping the appropriate files into the Upload files field. For your convenience, a preview section is available to review the acceptable documents.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Refining Your Selections: </strong>
-                                                        To ensure your content is accurate, you could cancel uploaded data. Also the option to "remove all previewed files" is at your disposal. This step allows you to make informed decisions about the materials you intend to include.
+                                                        The option to "remove all previewed files" or individual files are at your disposal. This step allows you to make informed decisions about the materials you intend to include.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
@@ -88,7 +88,7 @@ const WorkflowSlider = ({ open, setOpen }) => {
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Continuous Document Addition: </strong>
-                                                        Should you wish to augment your training data further, you can repeat the process. Begin by clearing the existing previewed files, then select and send additional files for processing
+                                                        Should you wish to augment your sent data further, you can simply add new files and send them to the back end. Begin by clearing the existing previewed files, then select and send additional files for processing. Don't worry, the system is smart enough not to accept two files with the same name.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
@@ -100,7 +100,13 @@ const WorkflowSlider = ({ open, setOpen }) => {
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Creating Your Custom Knowledge Base: </strong>
-                                                        The time arrives to craft your personalized chat bot. By selecting "Create your knowledge base" located at the bottom left corner, the system initiates the learning process. Once completed, your chat bot emerges and is ready for interaction.
+                                                        The time arrives to craft your personalized chat bot. By selecting "Create your XXX knowledge base" located at the bottom of the page, the system initiates the learning process. Once completed, your chat bot emerges and is ready for interaction.
+                                                    </li>
+                                                </p>
+                                                <p className="text-gray-800">
+                                                    <li>
+                                                        <strong>Moderation: </strong>
+                                                        You have the ability to use the chatbot in a moderated state. It avoids askin the bot questions is the questions are not appropriate according to OpenAI's standard.
                                                     </li>
                                                 </p>
                                             </ol>

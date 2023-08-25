@@ -62,7 +62,7 @@ export default function Setup({ isLocal, onSetupComplete }) {
           flexDirection: "column",
         }}
       >
-        <h1>Training...</h1>
+        <h1 style={{ fontSize: '20px', fontWeight: 'bold' }}>Training...</h1>
         <div style={{ width: "70%" }}>
           <LinearProgress />
         </div>

@@ -8,7 +8,7 @@ export default function Navigation() {
         <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab variant="extended" size="medium" color="primary" aria-label="add" sx={{ color: 'black' }}>
                 <NavigationIcon sx={{ mr: 1 }} />
-                Demo WorkFlow
+                WorkFlow Breakdown
             </Fab>
         </Box>
     );

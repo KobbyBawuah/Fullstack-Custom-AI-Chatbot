@@ -6,7 +6,7 @@ const ModerationToggle = ({ moderation, setmoderation }) => {
         setmoderation((prev) => !prev);
     };
     return (
-        <div className="flex items-center">
+        <div>
             <label
                 htmlFor="moderationToggle"
                 className="mr-2 text-sm text-gray-600"

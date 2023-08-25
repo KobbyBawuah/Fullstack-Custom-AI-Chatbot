@@ -150,7 +150,6 @@ export default function Home() {
   async function sendQuery() {
     //pass in state of local button to change the function used
     if (!query) return;
-    //implement moderation when you have time
     setResult("");
     setLoading(true);
 
