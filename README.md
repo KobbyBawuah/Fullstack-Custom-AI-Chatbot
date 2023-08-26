@@ -102,11 +102,13 @@ https://llamahub.ai/l/tools-notion
 2. Adjust the code acordingly. 
 
 # Example of WebApp WorkFlow:
-<iframe src="https://giphy.com/embed/WJAygei0DzZsrP2Ku7" width="480" height="310" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/WJAygei0DzZsrP2Ku7">via GIPHY</a></p>
+![Example image of interface](images/gifmaker_me.gif)
+
 
 
 #### You could pull the alternative UI on http://localhost:3000/oldUI
-<iframe src="https://giphy.com/embed/rzmj0KYZ5u2dr5ujc8" width="480" height="235" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/rzmj0KYZ5u2dr5ujc8">via GIPHY</a></p>
+<!-- ![SearchBot example](images/) -->
+
 
 
 ## 🔗 Links
