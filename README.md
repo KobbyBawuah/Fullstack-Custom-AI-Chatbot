@@ -76,7 +76,6 @@ If you wish to use the Bot in moderation mode, you will require internet connect
 
 Sample questions and their expected answers based on the custom document currently provided are as follows:
 - Who is the creator of this chatbot? ---> Answer: Kwabena
-- Who is his Girlfriend? ---> Answer: Kemi
 - Who is his father? --> Answer: Information not provided in data
 - Who wrote the constitution? ---> Answer: Kwabena
 - Does he live in Nigeria? ---> Answer: No, Canada
@@ -102,13 +101,11 @@ https://llamahub.ai/l/tools-notion
 2. Adjust the code acordingly. 
 
 # Example of WebApp WorkFlow:
-![Example image of interface](images/gifmaker_me.gif)
-
+![Example image of interface](images/main.gif)
 
 
 #### You could pull the alternative UI on http://localhost:3000/oldUI
-<!-- ![SearchBot example](images/) -->
-
+![Example image of alternative interface](images/alternative.gif)
 
 
 ## 🔗 Links
