@@ -101,7 +101,14 @@ https://llamahub.ai/l/tools-notion
 
 2. Adjust the code acordingly. 
 
-#### Example of Interface(Not Updated):
-![Example image of interface](images/interface1.png)
-![Preview](images/interface2.png)
-![SearchBot example](images/interface3.png)
+# Example of WebApp WorkFlow:
+<iframe src="https://giphy.com/embed/WJAygei0DzZsrP2Ku7" width="480" height="310" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/WJAygei0DzZsrP2Ku7">via GIPHY</a></p>
+
+
+#### You could pull the alternative UI on http://localhost:3000/oldUI
+<iframe src="https://giphy.com/embed/rzmj0KYZ5u2dr5ujc8" width="480" height="235" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/rzmj0KYZ5u2dr5ujc8">via GIPHY</a></p>
+
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](XXX)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kwabena-g-bawuah/)
