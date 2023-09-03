@@ -270,7 +270,7 @@ export default function Home() {
   useEffect(() => {
     checkDatabaseStates();
     if (trained && bottomContainerRef.current) {
-      bottomContainerRef.current.scrollIntoView({ behavior: "smooth" });
+      (bottomContainerRef.current as HTMLElement).scrollIntoView({ behavior: "smooth" });
     }
   }, [trained]);
 
@@ -279,7 +279,7 @@ export default function Home() {
       {/* Another possible component */}
       <WorkflowSlider open={open} setOpen={setOpen} />
 
-      <Banner open={open} setOpen={setOpen} />
+      {/* <Banner open={open} setOpen={setOpen} /> */}
       <section className="flex flex-col gap-2 py-10">
         {/* Style the components */}
         <div className="container">

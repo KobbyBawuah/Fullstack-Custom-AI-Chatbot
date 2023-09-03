@@ -64,7 +64,7 @@ const WorkflowSlider = ({ open, setOpen }) => {
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Utilize Existing Knowledge Base: </strong>
-                                                        Upon Load, if you've previously trained your chat bot and it exists, you can simply choose the option with the data base symbol. You can update that knowledge base by clicking on the arrow at the bottom of that button. If you wish to delete the knowledge base, click on the trash can.
+                                                        Upon Load, if you&apos;ve previously trained your chat bot and it exists, you can simply choose the option with the data base symbol. You can update that knowledge base by clicking on the arrow at the bottom of that button. If you wish to delete the knowledge base, click on the trash can.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
@@ -76,37 +76,37 @@ const WorkflowSlider = ({ open, setOpen }) => {
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Refining Your Selections: </strong>
-                                                        The option to "remove all previewed files" or individual files are at your disposal. This step allows you to make informed decisions about the materials you intend to include.
+                                                        The option to &quot;remove all previewed files&quot; or individual files are at your disposal. This step allows you to make informed decisions about the materials you intend to include.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Initiating File Processing: </strong>
-                                                        Once you are satisfied with your chosen documents, proceed by clicking the "send files for processing" button. This action prompts the chat bot to securely store the uploaded files within the backend system.
+                                                        Once you are satisfied with your chosen documents, proceed by clicking the &quot;send files for processing&quot; button. This action prompts the chat bot to securely store the uploaded files within the backend system.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Continuous Document Addition: </strong>
-                                                        Should you wish to augment your sent data further, you can simply add new files and send them to the back end. Begin by clearing the existing previewed files, then select and send additional files for processing. Don't worry, the system is smart enough not to accept two files with the same name.
+                                                        Should you wish to augment your sent data further, you can simply add new files and send them to the back end. Begin by clearing the existing previewed files, then select and send additional files for processing. Don&apos;t worry, the system is smart enough not to accept two files with the same name.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Effortless Data Removal: </strong>
-                                                        For comprehensive control, the option to "Delete all sent files" is accessible. This feature empowers you to clear all currently saved data with ease.
+                                                        For comprehensive control, the option to &quot;Delete all sent files&quot; is accessible. This feature empowers you to clear all currently saved data with ease.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Creating Your Custom Knowledge Base: </strong>
-                                                        The time arrives to craft your personalized chat bot. By selecting "Create your XXX knowledge base" located at the bottom of the page, the system initiates the learning process. Once completed, your chat bot emerges and is ready for interaction.
+                                                        The time arrives to craft your personalized chat bot. By selecting &quot;Create your XXX knowledge base&quot; located at the bottom of the page, the system initiates the learning process. Once completed, your chat bot emerges and is ready for interaction.
                                                     </li>
                                                 </p>
                                                 <p className="text-gray-800">
                                                     <li>
                                                         <strong>Moderation: </strong>
-                                                        You have the ability to use the chatbot in a moderated state. It avoids askin the bot questions is the questions are not appropriate according to OpenAI's standard.
+                                                        You have the ability to use the chatbot in a moderated state. It avoids askin the bot questions is the questions are not appropriate according to OpenAI&apos;s standard.
                                                     </li>
                                                 </p>
                                             </ol>

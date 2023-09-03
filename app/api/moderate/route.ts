@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getModeration } from '../../../utils'
 
+interface ModerationResult {
+    results?: {
+        categories: string[];
+        // Add other properties if needed
+    };
+}
 
 //function named POST which will be executed when a POST request is made to this API route.
 export async function POST(req: NextRequest) {
@@ -16,7 +22,8 @@ export async function POST(req: NextRequest) {
         const result = await getModeration(question);
         console.log("from route after calling getModeration:", result)
         if (result) {
-            const errorMessage = `The question "${question}" was flagged for the following reasons:\n${result.results.categories}`;
+            // const errorMessage = `The question "${question}" was flagged for the following reasons:\n${result.results.categories}`;
+            const errorMessage = `The question "${question}" was flagged for the following reasons:\n${result}`;
             return NextResponse.json({ success: true, error: result });
         }
         console.log('Moderation came back empty from within route');

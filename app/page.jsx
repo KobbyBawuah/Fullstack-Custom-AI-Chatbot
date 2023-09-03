@@ -10,28 +10,11 @@ import Banner from "../components/Banner"
 export default function NewUI() {
   const [screen, setScreen] = useState("home");
   const [local, setLocal] = useState(null);
-  const [localDBState, setlocalDBState] = useState(null);
-  const [OpenAiDBState, setOpenAiDBState] = useState(null);
+  const [localDBState, setlocalDBState] = useState(false);
+  const [OpenAiDBState, setOpenAiDBState] = useState(false);
   const [open, setOpen] = useState(true);
 
-  async function checkDatabaseStates() {
-    //pinecone check
-    try {
-      const result = await fetch("/api/dbcheck", {
-        method: "POST",
-      });
-      const json = await result.json();
-      if (json?.success) {
-        console.log("Result from DB check: ", json);
-        setOpenAiDBState(true);
-      } else {
-        console.log("Result from DB check: ", json);
-        setOpenAiDBState(false);
-      }
-    } catch (err) {
-      console.log("err in pinecone DB check:", err);
-    }
-
+  async function checklocalDatabaseStates() {
     //local DB check
     try {
       const result = await fetch("http://localhost:5000/localdbcheck", {
@@ -51,9 +34,29 @@ export default function NewUI() {
     }
   }
 
+  async function checkPineconeDatabaseState() {
+    //pinecone check
+    try {
+      const result = await fetch("/api/dbcheck", {
+        method: "POST",
+      });
+      const json = await result.json();
+      if (json?.success) {
+        console.log("Result from DB check: ", json);
+        setOpenAiDBState(true);
+      } else {
+        console.log("Result from DB check: ", json);
+        setOpenAiDBState(false);
+      }
+    } catch (err) {
+      console.log("err in pinecone DB check:", err);
+    }
+  }
+
   useEffect(() => {
     const fetchDBStates = async () => {
-      await checkDatabaseStates();
+      await checkPineconeDatabaseState();
+      await checklocalDatabaseStates();
     };
 
     if (screen === "home") {
@@ -68,7 +71,8 @@ export default function NewUI() {
         <ChatSelector
           localExists={localDBState}
           remoteExists={OpenAiDBState}
-          loading={localDBState === null || OpenAiDBState === null}
+          localloading={localDBState}
+          openloading={OpenAiDBState}
           onSelect={(isLocal, exists) => {
             setLocal(isLocal);
             if (exists) {

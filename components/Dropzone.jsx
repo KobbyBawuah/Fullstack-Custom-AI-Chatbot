@@ -120,7 +120,7 @@ const Dropzone = ({ className }) => {
           <p>Drop the files here ...</p>
         ) : (
           <p>
-            Drag 'n' drop some files here, or click this area to select files
+            Drag &apos;n&apos; drop some files here, or click this area to select files
           </p>
         )}
       </div>

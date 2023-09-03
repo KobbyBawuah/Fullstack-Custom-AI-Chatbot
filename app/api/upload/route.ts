@@ -12,13 +12,15 @@ export async function POST(request: NextRequest) {
     }
 
     const fileWrites = files.map(async (file, index) => {
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        console.log(file)
-        const path = `documents/${file.name}`;
+        if (file instanceof File) {
+            const bytes = await file.arrayBuffer();
+            const buffer = Buffer.from(bytes);
+            console.log(file)
+            const path = `documents/${file.name}`;
 
-        await fs.writeFile(path, buffer);
-        console.log(`Saved file ${index + 1}: ${file.name} to ${path}`);
+            await fs.writeFile(path, buffer);
+            console.log(`Saved file ${index + 1}: ${file.name} to ${path}`);
+        }
     });
 
     await Promise.all(fileWrites);

@@ -46,7 +46,8 @@ function SelectorPanel({
   label,
   onClick,
   exists,
-  loading,
+  openloading,
+  localloading,
   onDelete,
   onUpload,
 }) {
@@ -72,19 +73,21 @@ function SelectorPanel({
         gap: "40px",
         cursor: "pointer",
       }}
-      onClick={!loading && onClick}
+      onClick={!openloading && !localloading && onClick}
     >
-      {loading ? (
-        <CircularProgress />
-      ) : exists ? (
-        <StorageIcon
-          style={{ width: "100px", height: "100px", opacity: "0.6" }}
-        />
-      ) : (
-        <AddCircleOutlineIcon
-          style={{ width: "100px", height: "100px", opacity: "0.6" }}
-        />
-      )}
+      {
+        // loading ? (
+        //   <CircularProgress />
+        // ) : 
+        exists ? (
+          <StorageIcon
+            style={{ width: "100px", height: "100px", opacity: "0.6" }}
+          />
+        ) : (
+          <AddCircleOutlineIcon
+            style={{ width: "100px", height: "100px", opacity: "0.6" }}
+          />
+        )}
       <div style={{ fontSize: "2em", textAlign: "center", fontFamily: "Arial, sans-serif" }}>
         {label}
       </div>
@@ -171,7 +174,8 @@ export default function ChatSelector({
   onSelect,
   localExists,
   remoteExists,
-  loading,
+  localloading,
+  openloading,
   onDelete,
   onUpload,
 }) {
@@ -189,7 +193,7 @@ export default function ChatSelector({
         label="OpenAI ChatBot"
         onClick={() => onSelect(false, remoteExists)}
         exists={remoteExists}
-        loading={loading}
+        loading={localloading}
         onDelete={() => {
           deleteOpenAiKnowledgebase();
           onDelete("OpenAI ChatBot");
@@ -202,7 +206,7 @@ export default function ChatSelector({
         label="Local ChatBot"
         onClick={() => onSelect(true, localExists)}
         exists={localExists}
-        loading={loading}
+        loading={openloading}
         onDelete={() => {
           deletelocalKnowledgebase();
           onDelete("Local ChatBot");
